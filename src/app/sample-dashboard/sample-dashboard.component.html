@@ -1,0 +1,257 @@
+<div class="main-container">
+
+    <div class="content-container">
+
+        <nav class="sidenav">
+            <section class="sidenav-content">
+
+
+                <a class="nav-link">
+                    <button class="btn btn-primary" (click)="displayMode()">New Registration</button>
+                </a>
+                <a class="nav-link">
+                    <button class="btn btn-primary" (click)="displayMode1()">Search Patient</button>
+                </a>
+                <a class="nav-link">
+                    <button class="btn btn-primary" (click)="diagCodeTest()">Diag Code</button>
+                </a>
+                <section class="nav-group collapsible">
+                    <input id="tabexample1" type="checkbox">
+                    <label for="tabexample1">Manage Account</label>
+                    <ul class="nav-list">
+                        <li><a class="nav-link">Reset Password</a></li>
+                        <!-- <li><a class="nav-link">Link 2</a></li> -->
+                    </ul>
+                </section>
+                <!--
+                <section class="nav-group">
+                    <input id="tabexample2" type="checkbox">
+                    <label for="tabexample2">Default Nav Element</label>
+                    <ul class="nav-list">
+                        <li><a class="nav-link">Link 1</a></li>
+                        <li><a class="nav-link">Link 2</a></li>
+                        <li><a class="nav-link active">Link 3</a></li>
+                        <li><a class="nav-link">Link 4</a></li>
+                        <li><a class="nav-link">Link 5</a></li>
+                        <li><a class="nav-link">Link 6</a></li>
+                    </ul>
+                </section>
+                -->
+            </section>
+        </nav>
+
+
+
+
+
+        <div *ngIf="displayStruct == 'patreg'" class="content-area" style="padding-right: 10%;">
+
+
+            <!-- <button class="btn btn-primary" (click)="displayMode1()">Search Patient</button> -->
+            <br> <br>
+
+
+            <form id="regpat" clrStepper class="clr-form" clrForm [formGroup]="form" (ngSubmit)="onSubmit()">
+                <clr-stepper-panel formGroupName="personalDetails">
+                    <clr-step-title>Patient Details</clr-step-title>
+                    <!--<clr-step-description>Description goes here.</clr-step-description>-->
+                    <clr-step-content *clrIfExpanded>
+
+                        <clr-input-container>
+                            <label>Start Time</label>
+
+                            <input clrInput formControlName="startTime" />
+                        </clr-input-container>
+
+                        <clr-input-container>
+                            <label>End Time</label>
+
+                            <input clrInput formControlName="endTime" />
+                        </clr-input-container>
+                        <clr-input-container>
+
+
+                            <label> Patient Name</label>
+
+                            <input clrInput formControlName="patientName" />
+                            <clr-control-error *clrIfError="'required'">Patient Name Required</clr-control-error>
+                        </clr-input-container>
+
+                        <clr-input-container>
+                            <label>Caller Name</label>
+                            <input clrInput formControlName="callerName" />
+                            <clr-control-error *clrIfError="'required'">Caller Name Required</clr-control-error>
+                        </clr-input-container>
+
+                        <clr-input-container>
+                            <label>Provider Name</label>
+                            <input clrInput formControlName="providerName" />
+                            <clr-control-error *clrIfError="'required'">Provider Name Required</clr-control-error>
+                        </clr-input-container>
+
+                        <clr-input-container>
+                            <clr-icon shape="mobile" class="is-solid"></clr-icon>
+                            <label>  Phone Number</label>
+                            <input clrInput formControlName="phoneNumber" />
+                            <clr-control-error *clrIfError="'required'">Phone Number Required</clr-control-error>
+                        </clr-input-container>
+
+
+                        <clr-date-container>
+                            <label>Date Of Birth</label>
+                            <input formControlName="dob" type="date" clrDate name="dob">
+                            <clr-control-error *clrIfError="'required'">Date Of Birth Required</clr-control-error>
+                        </clr-date-container>
+
+                        <clr-select-container>
+                            <label>Select the PCP</label>
+                            <select formControlName="pcp" clrSelect name="options">
+                                <option value="">Select the PCP</option>
+                                <option  *ngFor="let order of listOfClients.Clients;" [value]="order">
+                                    {{order}}
+                                  </option>
+                            </select>
+                        </clr-select-container>
+
+                        <button clrStepButton="next">next</button>
+                    </clr-step-content>
+                </clr-stepper-panel>
+
+                <clr-stepper-panel formGroupName="medicalDetails">
+                    <clr-step-title>Medical Details</clr-step-title>
+                    <clr-step-description>Fill on the Medical Details of the Patient</clr-step-description>
+                    <clr-step-content *clrIfExpanded>
+
+
+
+                        <div class="clr-form-control">
+                            <label for="vertical-textarea-basic" class="clr-control-label">Allergies</label>
+                            <div class="clr-control-container">
+                                <div class="clr-textarea-wrapper">
+                                    <textarea id="vertical-textarea-basic" formControlName="allergies" placeholder="Mention the allergies of patient if any..." class="clr-textarea" cols="70"></textarea>
+                                    <clr-icon class="clr-validate-icon" shape="exclamation-circle"></clr-icon>
+
+                                </div>
+
+
+                            </div>
+                        </div>
+
+
+                        <div class="clr-form-control">
+                            <label for="vertical-textarea-basic" class="clr-control-label">MEDS</label>
+                            <div class="clr-control-container">
+                                <div class="clr-textarea-wrapper">
+                                    <textarea id="vertical-textarea-basic" formControlName="meds" placeholder="Mention the medicines of patient if any..." class="clr-textarea" cols="70"></textarea>
+                                    <clr-icon class="clr-validate-icon" shape="exclamation-circle"></clr-icon>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="clr-form-control">
+                            <label for="vertical-textarea-basic" class="clr-control-label">PMH</label>
+                            <div class="clr-control-container">
+                                <div class="clr-textarea-wrapper">
+                                    <textarea id="vertical-textarea-basic" formControlName="pmh" placeholder="Mention the medicines of patient if any..." class="clr-textarea" cols="70"></textarea>
+                                    <clr-icon class="clr-validate-icon" shape="exclamation-circle"></clr-icon>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="clr-form-control">
+                            <label for="vertical-textarea-basic" class="clr-control-label">FH</label>
+                            <div class="clr-control-container">
+                                <div class="clr-textarea-wrapper">
+                                    <textarea id="vertical-textarea-basic" formControlName="fh" placeholder="Mention the medicines of patient if any..." class="clr-textarea" cols="70"></textarea>
+                                    <clr-icon class="clr-validate-icon" shape="exclamation-circle"></clr-icon>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="clr-form-control">
+                            <label for="vertical-textarea-basic" class="clr-control-label">CC </label>
+                            <div class="clr-control-container">
+                                <div class="clr-textarea-wrapper">
+                                    <textarea id="vertical-textarea-basic" formControlName="cc" placeholder="Mention the medicines of patient if any..." class="clr-textarea" cols="70"></textarea>
+                                    <clr-icon class="clr-validate-icon" shape="exclamation-circle"></clr-icon>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="clr-form-control">
+                            <label for="vertical-textarea-basic" class="clr-control-label">HPI</label>
+                            <div class="clr-control-container">
+                                <div class="clr-textarea-wrapper">
+                                    <textarea id="vertical-textarea-basic" formControlName="hpi" placeholder="Mention the medicines of patient if any..." class="clr-textarea" cols="70"></textarea>
+                                    <clr-icon class="clr-validate-icon" shape="exclamation-circle"></clr-icon>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="clr-form-control">
+                            <label for="vertical-textarea-basic" class="clr-control-label">ROS</label>
+                            <div class="clr-control-container">
+                                <div class="clr-textarea-wrapper">
+                                    <textarea id="vertical-textarea-basic" formControlName="ros" placeholder="Mention the medicines of patient if any..." class="clr-textarea" cols="70"></textarea>
+                                    <clr-icon class="clr-validate-icon" shape="exclamation-circle"></clr-icon>
+                                </div>
+
+                            </div>
+                        </div>
+
+
+                        <div class="clr-form-control">
+                            <label for="vertical-textarea-basic" class="clr-control-label">EXAM</label>
+                            <div class="clr-control-container">
+                                <div class="clr-textarea-wrapper">
+                                    <textarea id="vertical-textarea-basic" formControlName="exam" placeholder="Mention the medicines of patient if any..." class="clr-textarea" cols="70"></textarea>
+                                    <clr-icon class="clr-validate-icon" shape="exclamation-circle"></clr-icon>
+                                </div>
+
+                            </div>
+                        </div>
+                        <!--<button clrStepButton="next">next</button>-->
+
+                        <button clrStepButton="submit"><clr-icon shape="success-standard"></clr-icon>&nbsp;&nbsp;submit</button>
+                    </clr-step-content>
+                </clr-stepper-panel>
+
+                <!-- <clr-stepper-panel formGroupName="callDetails"> 
+                    <clr-step-title>Call Details</clr-step-title>
+                    
+                    <clr-step-content *clrIfExpanded>
+
+                        <label>Start Time</label>
+                        
+                        <input clrInput formControlName="startTime" />
+
+                        <label>End Time</label>
+                        
+                        <input clrInput formControlName="endTime" />
+                        
+
+
+                        <button clrStepButton="submit"><clr-icon shape="success-standard"></clr-icon>&nbsp;&nbsp;submit</button>
+                    </clr-step-content>
+                </clr-stepper-panel> -->
+            </form>
+
+        </div>
+
+        <div *ngIf="displayStruct == 'searchFields'" class="content-area">
+            <!-- <button class="btn btn-primary" (click)="displayMode()">New Registration</button> -->
+            <app-search-fields></app-search-fields>
+        </div>
+
+        <div *ngIf="displayStruct == 'searchFields'" class="content-area">
+
+
+            <app-search-results></app-search-results>
+        </div>
+
+    </div>
+</div>

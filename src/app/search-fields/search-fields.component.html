@@ -1,0 +1,112 @@
+<div class="clr-row">
+    <div class="clr-col-lg-18 clr-col-12">
+        <div class="card">
+            <div class="card-header">
+                <b>SEARCH FOR AN EXISTING PATIENT</b>
+            </div>
+            <div class="card-block">
+
+
+                <form [formGroup]="searchForm" (ngSubmit)="onSubmit()">
+
+
+                    <span for="basic">Basic Input</span>
+                    <div class="clr-input-wrapper">
+                        <input type="text" id="basic" placeholder="Enter value here" class="clr-input">
+                    </div>
+
+
+                    <clr-input-container>
+                        <label>Enter Name</label>
+                        <input clrInput formControlName="nameSearch" />
+                    </clr-input-container>
+                    <clr-input-container>
+                        <label>Enter Date Of Birth</label>
+                        <input clrInput formControlName="dobSearch" />
+                    </clr-input-container>
+                    <!--
+                    <clr-select-container>
+                        <label>Select the PCP</label>
+                        <select clrSelect name="options" formControlName="pcpSearch">
+                        <option value="">Select the PCP</option>
+                        <option value="one">One</option>
+                        <option value="two">Two</option>
+                        <option value="three">Three</option>
+                    </select>
+                    </clr-select-container>
+                    -->
+                    <clr-select-container>
+                        <label>Select the PCP</label>
+                        <select formControlName="pcp" clrSelect name="options">
+                            <option value="">Select the PCP</option>
+                            <option  *ngFor="let order of listOfClients.Clients;" [value]="order">
+                                {{order}}
+                              </option>
+                        </select>
+                    </clr-select-container>
+
+                    <clr-input-container>
+                        <label>Enter Phone Number</label>
+                        <input clrInput formControlName="phoneSearch" />
+                    </clr-input-container>
+                    <br>
+                    <button type="submit" class="btn btn-success-outline">Search</button>
+                </form>
+
+
+            </div>
+
+            <!--
+            <div class="card-footer">
+                <button class="btn btn-sm btn-link">Footer Action 1</button>
+                <button class="btn btn-sm btn-link">Footer Action 2</button>
+            </div> -->
+        </div>
+    </div>
+</div>
+
+<!--
+<div class="main-container">
+    <div class="content-area">
+        <form class="clr-form" clrForm [formGroup]="searchForm" (ngSubmit)="onSubmit()">
+            <div class="clr-control-container">
+
+
+                <label for="basic" class="clr-control-label">Basic input</label>
+                <div class="clr-input-wrapper">
+                    <input type="text" id="basic" placeholder="Enter value here" class="clr-input">
+                    <clr-icon class="clr-validate-icon" shape="exclamation-circle"></clr-icon>
+                </div>
+                <span class="clr-subtext">Helper Text</span>
+            </div>
+
+
+            <clr-input-container>
+                <label>Enter Name</label>
+                <input clrInput formControlName="nameSearch" />
+            </clr-input-container>
+            <clr-input-container>
+                <label>Enter Date Of Birth</label>
+                <input clrInput formControlName="dobSearch" />
+            </clr-input-container>
+
+            <clr-select-container>
+                <label>Select the PCP</label>
+                <select clrSelect name="options" formControlName="pcpSearch">
+                <option value="">Select the PCP</option>
+                <option value="one">One</option>
+                <option value="two">Two</option>
+                <option value="three">Three</option>
+            </select>
+            </clr-select-container>
+
+            <clr-input-container>
+                <label>Enter Phone Number</label>
+                <input clrInput formControlName="phoneSearch" />
+            </clr-input-container>
+            <button type="submit" class="btn btn-success-outline">Search</button>
+        </form>
+    </div>
+</div>
+
+-->

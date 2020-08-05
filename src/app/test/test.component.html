@@ -1,0 +1,53 @@
+<!--
+<p>
+    Select multiple elements using custom templates with checkboxes</p>
+
+<ng-select [items]="people" [multiple]="true" bindLabel="name" groupBy="gender" [selectableGroup]="true" [closeOnSelect]="false" bindValue="name" [(ngModel)]="selectedPeople">
+
+    <ng-template ng-optgroup-tmp let-item="item" let-item$="item$" let-index="index">
+        <input id="item-{{id}" type="checkbox" [ngModel]="item$.selected" /> {{item.gender | uppercase}}
+    </ng-template>
+
+    <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
+        <input id="item-{{id}}" type="checkbox" [ngModel]="item$.selected" /> {{item.name}} {{item.id}}
+    </ng-template>
+
+</ng-select>
+
+<br> 
+
+
+<small>{{selectedPeople | json}}</small> -->
+
+
+
+<h3>Select multiple elements using custom templates with checkboxes</h3>
+
+<ng-select [items]="data" [multiple]="true" bindLabel="description" groupBy="codegroup" [selectableGroup]="true" [closeOnSelect]="false" bindValue="codeid" [(ngModel)]="selectedPeople">
+
+    <ng-template ng-optgroup-tmp let-item="item" let-item$="item$" let-index="index">
+        <input id="item-{{codeid}" type="checkbox" [ngModel]="item$.selected" /> {{item.codegroup | uppercase}}
+    </ng-template>
+
+    <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
+        <input id="item-{{codeid}}" type="checkbox" [ngModel]="item$.selected" /> {{item.codeid}} {{item.description}}
+    </ng-template>
+
+</ng-select>
+
+<br>
+
+
+<p>
+    In this example we are loading many items but only ~30 of them are rendered in the DOM. This allows to load as big data as you want.
+</p>
+
+<ng-select [items]="photosBuffer" [multiple]="true" [virtualScroll]="true" [selectableGroup]="true" [(ngModel)]="selectedPeople" [closeOnSelect]="false" [loading]="loading" bindLabel="description" bindValue="codeid" placeholder="Select photo" appendTo="body"
+    (scroll)="onScroll($event)" (scrollToEnd)="onScrollToEnd()">
+    <ng-template ng-header-tmp>
+        <small class="form-text text-muted">Loaded {{photosBuffer.length}} of {{photos.length}}</small>
+    </ng-template>
+    <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
+        <input id="item-{{codeid}}" type="checkbox" [ngModel]="item$.selected" /> {{item.codeid}} {{item.description}}
+    </ng-template>
+</ng-select>

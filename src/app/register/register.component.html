@@ -1,0 +1,77 @@
+<!--
+<form clrForm>
+    <span class="clr-sr-only">Tabbing through form inputs will trigger validation messages to be read aloud.</span>
+    <clr-input-container>
+        <label>First name</label>
+        <input clrInput type="text" [(ngModel)]="firstName" name="firstName" required />
+        <clr-control-error>We need your first name for legal compliance</clr-control-error>
+    </clr-input-container>
+    <clr-input-container>
+        <label>Middle name (Optional)</label>
+        <input clrInput type="text" [(ngModel)]="middleName" name="middleName" />
+    </clr-input-container>
+    <clr-input-container>
+        <label>Last name</label>
+        <input clrInput type="text" [(ngModel)]="lastName" name="lastName" required />
+        <clr-control-error>We need your last name for legal compliance</clr-control-error>
+    </clr-input-container>
+</form> -->
+
+<div class="login-wrapper">
+    <form class="login">
+        <section class="title">
+            <h3 class="welcome">Welcome to</h3>
+            YOUR APPLICATION
+            <h5 class="hint">  </h5>
+        </section>
+        <div class="login-group">
+            
+            <clr-input-container>
+                <label>Full Name</label>
+                <input clrInput type="text" [(ngModel)]="userdata.fullname" name="fullname" required />
+                <clr-control-error>We need your first name for legal compliance</clr-control-error>
+            </clr-input-container>
+            
+            <clr-input-container>
+                <label>User Name</label>
+                <input clrInput type="text" [(ngModel)]="userdata.username" name="username" required />
+                <clr-control-error>We need your last name for legal compliance</clr-control-error>
+            </clr-input-container>
+
+            <clr-password-container>
+                <label >Password</label>
+                <input type="password" name="password" [(ngModel)]="userdata.password" clrPassword placeholder="Password"  />
+            </clr-password-container>
+
+            <clr-control-error style="color:red;" *ngIf="userdata.password!='' && userdata.password!=re_password" >password not matched</clr-control-error>
+
+            <clr-password-container>
+                <input type="password" name="password" [(ngModel)]="re_password" clrPassword placeholder="Confirm Password"  />
+            </clr-password-container>
+
+           
+
+            <clr-input-container>
+                <label>Email</label>
+                <input clrInput type="text" [(ngModel)]="userdata.email" name="email" required />
+                <clr-control-error >We need your last name for legal compliance</clr-control-error>
+            </clr-input-container>
+
+            <clr-input-container>
+                <label>Phone No</label>
+                <input clrInput type="text" [(ngModel)]="userdata.phone_no" name="phone_no" required />
+                <clr-control-error>We need your last name for legal compliance</clr-control-error>
+            </clr-input-container>
+
+
+            
+            
+            <button (click)="register()" class="btn btn-primary">REGISTER</button>
+            <a [routerLink]="['/login']" class="signup">Have an account ? Login Now</a>
+            
+
+        </div>
+    </form>
+
+    
+</div>

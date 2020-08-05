@@ -1,0 +1,49 @@
+<header class="header-6">
+    
+    <div class="branding">
+        <a href="javascript://" class="nav-link">
+           <span class="title">MY APP ADMIN</span>
+        </a>
+    </div>
+
+   
+
+    <div class="header-actions">
+        <clr-dropdown>
+            <button class="nav-text" clrDropdownTrigger aria-label="open user profile">
+                <clr-icon shape="user"></clr-icon>
+                {{username}}
+                <clr-icon shape="caret down"></clr-icon>
+            </button>
+            <clr-dropdown-menu *clrIfOpen clrPosition="bottom-right">
+                <a  clrDropdownItem>My account</a>
+
+                <a (click)="logout()" clrDropdownItem>Log out</a>
+            </clr-dropdown-menu>
+        </clr-dropdown>
+    </div>
+
+</header>
+
+<nav class="subnav">
+    <ul class="nav">
+        <li class="nav-item">
+            <a class="nav-link" routerLink="user_management" routerLinkActive="active current" >User Management</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#">Management</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#">Cloud</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#">Tenants</a>
+        </li>
+    </ul>
+</nav>
+
+
+<router-outlet></router-outlet>
+
+
+

@@ -17,7 +17,7 @@ export class AdminAuthGaurd implements CanActivate {
     console.log('in admin routes gaurd')
 
     return this.httpClient.get(
-      'http://127.0.0.1:5000/admin_check', 
+      'http://44.230.62.224:5000/admin_check', 
     )
     .toPromise()
     .then(response => {

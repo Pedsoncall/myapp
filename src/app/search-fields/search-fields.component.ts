@@ -22,7 +22,7 @@ export class SearchFieldsComponent implements OnInit {
       pcp:[''],
     });
 
-    this.httpclient.get('http://127.0.0.1:5000/getClients')
+    this.httpclient.get('http://44.230.62.224:5000/getClients')
             .toPromise()
             .then(response => {
               //console.log(response)

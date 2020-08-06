@@ -18,7 +18,7 @@ export class TestComponent implements OnInit {
     constructor(private httpclient:HttpClient) {
 
       console.log("dk")
-      this.httpclient.get('http://localhost:5000/diagCode')
+      this.httpclient.get('http://0.0.0.0:5000/diagCode')
       .toPromise()
       .then(response => {
         this.data1=response;

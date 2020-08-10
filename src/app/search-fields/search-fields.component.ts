@@ -11,9 +11,10 @@ export class SearchFieldsComponent implements OnInit {
 
   searchForm: FormGroup;
   listOfClients
+  fetchingData = 0;
   constructor(private formbuilder: FormBuilder,
               private httpclient:HttpClient) { 
-
+    this.fetchingData = 0;
     this.searchForm = this.formbuilder.group({
       nameSearch: [''],
       dobSearch: [''],
@@ -28,6 +29,7 @@ export class SearchFieldsComponent implements OnInit {
               //console.log(response)
               this.listOfClients = response
               console.log(this.listOfClients.Clients)
+              this.fetchingData = 1
             })
 
     console.log("hey there!")

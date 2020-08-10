@@ -12,13 +12,16 @@ import { HttpClient } from '@angular/common/http';
 export class SampleDashboardComponent implements OnInit {
 
   form: FormGroup;
+  timeForm: FormGroup;
   date = new Date().toLocaleString();
-  listOfClients
+  listOfClients:any;
+  fetchingData = 0;
 
   constructor(private formBuilder: FormBuilder,
     private loginServ: PatientDetailsService,
     private router: Router,
     private httpclient: HttpClient) {
+      this.fetchingData = 0;
     
       this.displayStruct = 'searchFields'
 
@@ -28,7 +31,14 @@ export class SampleDashboardComponent implements OnInit {
               //console.log(response)
               this.listOfClients = response
               console.log(this.listOfClients.Clients)
+              this.fetchingData = 1
+              
             })
+    
+    this.timeForm = this.formBuilder.group({
+      startTime: [this.date],
+      endTime:[''],
+    })
     
     this.form = this.formBuilder.group({
       personalDetails: this.formBuilder.group({
@@ -42,14 +52,18 @@ export class SampleDashboardComponent implements OnInit {
         pcp:[],
       }),
       medicalDetails: this.formBuilder.group({
-        allergies: [],
+        allergies: ['',Validators.required],
         meds: [],
         pmh: [],
         fh: [],
+        sh:[],
         cc: [],
         hpi:[],
         ros: [],
         exam: [],
+        diagnosis: [],
+        plan: [],
+        coding:[],
       }),
       callDetails: this.formBuilder.group({
         startTime: [],
@@ -59,7 +73,7 @@ export class SampleDashboardComponent implements OnInit {
   }
 
 
-  displayStruct
+  displayStruct: string
   searchResults = false
 
 
@@ -93,6 +107,7 @@ export class SampleDashboardComponent implements OnInit {
   }
   ngOnInit(): void {
     //throw new Error("Method not implemented.");
+    
   }
 
 }

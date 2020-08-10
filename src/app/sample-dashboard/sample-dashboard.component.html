@@ -1,4 +1,10 @@
-<div class="main-container">
+<div class="main-container" *ngIf='fetchingData== 0'>
+    <span class="spinner">
+    Loading...
+</span>
+
+</div>
+<div class="main-container" *ngIf='fetchingData== 1'>
 
     <div class="content-container">
 
@@ -45,18 +51,26 @@
 
 
         <div *ngIf="displayStruct == 'patreg'" class="content-area" style="padding-right: 10%;">
+            <form class="clr-form" clrForm [formGroup]="timeForm" (ngSubmit)="onSubmit()">
+                <clr-input-container>
+                    <label>Start Time</label>
 
+                    <input clrInput formControlName="startTime" />
+                </clr-input-container>
 
-            <!-- <button class="btn btn-primary" (click)="displayMode1()">Search Patient</button> -->
-            <br> <br>
+                <clr-input-container>
+                    <label>End Time</label>
 
+                    <input clrInput formControlName="endTime" />
+                </clr-input-container>
+            </form>
 
             <form id="regpat" clrStepper class="clr-form" clrForm [formGroup]="form" (ngSubmit)="onSubmit()">
                 <clr-stepper-panel formGroupName="personalDetails">
                     <clr-step-title>Patient Details</clr-step-title>
                     <!--<clr-step-description>Description goes here.</clr-step-description>-->
                     <clr-step-content *clrIfExpanded>
-
+                        <!--
                         <clr-input-container>
                             <label>Start Time</label>
 
@@ -68,6 +82,7 @@
 
                             <input clrInput formControlName="endTime" />
                         </clr-input-container>
+                        -->
                         <clr-input-container>
 
 
@@ -83,18 +98,23 @@
                             <clr-control-error *clrIfError="'required'">Caller Name Required</clr-control-error>
                         </clr-input-container>
 
+
+                        <clr-input-container>
+                            <clr-icon shape="mobile" class="is-solid"></clr-icon>
+                            <label>  Caller Number</label>
+                            <input clrInput formControlName="phoneNumber" />
+                            <clr-control-error *clrIfError="'required'">Phone Number Required</clr-control-error>
+                        </clr-input-container>
+
+
+
                         <clr-input-container>
                             <label>Provider Name</label>
                             <input clrInput formControlName="providerName" />
                             <clr-control-error *clrIfError="'required'">Provider Name Required</clr-control-error>
                         </clr-input-container>
 
-                        <clr-input-container>
-                            <clr-icon shape="mobile" class="is-solid"></clr-icon>
-                            <label>  Phone Number</label>
-                            <input clrInput formControlName="phoneNumber" />
-                            <clr-control-error *clrIfError="'required'">Phone Number Required</clr-control-error>
-                        </clr-input-container>
+
 
 
                         <clr-date-container>
@@ -124,19 +144,133 @@
 
 
 
+
+                        <div class="clr-form-control">
+                            <clr-textarea-container>
+                                <label class="clr-control-label">Allergies</label>
+                                <textarea clrTextarea formControlName="allergies" placeholder="Mention the allergies of patient if any..." cols="70" required></textarea>
+                                <clr-control-helper>Helper text</clr-control-helper>
+                                <clr-control-error>You must provide a description!</clr-control-error>
+                            </clr-textarea-container>
+                        </div>
+
+
+                        <div class="clr-form-control">
+                            <clr-textarea-container>
+                                <label class="clr-control-label">MEDS</label>
+                                <textarea clrTextarea formControlName="meds" placeholder="Mention the medicines of patient if any..." cols="70" required></textarea>
+                                <clr-control-helper>Helper text</clr-control-helper>
+                                <clr-control-error>You must provide a description!</clr-control-error>
+                            </clr-textarea-container>
+                        </div>
+
+
+
+                        <div class="clr-form-control">
+                            <clr-textarea-container>
+                                <label class="clr-control-label">PMH</label>
+                                <textarea clrTextarea formControlName="pmh" placeholder="Mention the medicines of patient if any..." cols="70" required></textarea>
+                                <clr-control-helper>Helper text</clr-control-helper>
+                                <clr-control-error>You must provide a description!</clr-control-error>
+                            </clr-textarea-container>
+                        </div>
+
+
+                        <div class="clr-form-control">
+                            <clr-textarea-container>
+                                <label class="clr-control-label">FH</label>
+                                <textarea clrTextarea formControlName="fh" placeholder="Mention the medicines of patient if any..." cols="70" required></textarea>
+                                <clr-control-helper>Helper text</clr-control-helper>
+                                <clr-control-error>You must provide a description!</clr-control-error>
+                            </clr-textarea-container>
+                        </div>
+
+                        <div class="clr-form-control">
+                            <clr-textarea-container>
+                                <label class="clr-control-label">SH</label>
+                                <textarea clrTextarea formControlName="sh" placeholder="Mention the medicines of patient if any..." cols="70" required></textarea>
+                                <clr-control-helper>Helper text</clr-control-helper>
+                                <clr-control-error>You must provide a description!</clr-control-error>
+                            </clr-textarea-container>
+                        </div>
+
+
+                        <div class="clr-form-control">
+                            <clr-textarea-container>
+                                <label class="clr-control-label">CC</label>
+                                <textarea clrTextarea formControlName="cc" placeholder="Mention the medicines of patient if any..." cols="70" required></textarea>
+                                <clr-control-helper>Helper text</clr-control-helper>
+                                <clr-control-error>You must provide a description!</clr-control-error>
+                            </clr-textarea-container>
+                        </div>
+
+                        <div class="clr-form-control">
+                            <clr-textarea-container>
+                                <label class="clr-control-label">HPI</label>
+                                <textarea clrTextarea formControlName="hpi" placeholder="Mention the medicines of patient if any..." cols="70" required></textarea>
+                                <clr-control-helper>Helper text</clr-control-helper>
+                                <clr-control-error>You must provide a description!</clr-control-error>
+                            </clr-textarea-container>
+                        </div>
+
+                        <div class="clr-form-control">
+                            <clr-textarea-container>
+                                <label class="clr-control-label">ROS</label>
+                                <textarea clrTextarea formControlName="ros" placeholder="Mention the medicines of patient if any..." cols="70" required></textarea>
+                                <clr-control-helper>Helper text</clr-control-helper>
+                                <clr-control-error>You must provide a description!</clr-control-error>
+                            </clr-textarea-container>
+                        </div>
+
+                        <div class="clr-form-control">
+                            <clr-textarea-container>
+                                <label class="clr-control-label">EXAM</label>
+                                <textarea clrTextarea formControlName="exam" placeholder="Mention the medicines of patient if any..." cols="70" required></textarea>
+                                <clr-control-helper>Helper text</clr-control-helper>
+                                <clr-control-error>You must provide a description!</clr-control-error>
+                            </clr-textarea-container>
+                        </div>
+
+                        <div class="clr-form-control">
+                            <clr-textarea-container>
+                                <label class="clr-control-label">Diagnosis</label>
+                                <textarea clrTextarea formControlName="diagnosis" placeholder="Mention the medicines of patient if any..." cols="70" required></textarea>
+                                <clr-control-helper>Helper text</clr-control-helper>
+                                <clr-control-error>You must provide a description!</clr-control-error>
+                            </clr-textarea-container>
+                        </div>
+
+                        <div class="clr-form-control">
+                            <clr-textarea-container>
+                                <label class="clr-control-label">PLAN</label>
+                                <textarea clrTextarea formControlName="plan" placeholder="Mention the medicines of patient if any..." cols="70" required></textarea>
+                                <clr-control-helper>Helper text</clr-control-helper>
+                                <clr-control-error>You must provide a description!</clr-control-error>
+                            </clr-textarea-container>
+                        </div>
+
+
+                        <div class="clr-form-control">
+                            <clr-textarea-container>
+                                <label class="clr-control-label">Coding</label>
+                                <textarea clrTextarea formControlName="coding" placeholder="Mention the medicines of patient if any..." cols="70" required></textarea>
+                                <clr-control-helper>Helper text</clr-control-helper>
+                                <clr-control-error>You must provide a description!</clr-control-error>
+                            </clr-textarea-container>
+                        </div>
+
+                        <!--
                         <div class="clr-form-control">
                             <label for="vertical-textarea-basic" class="clr-control-label">Allergies</label>
                             <div class="clr-control-container">
                                 <div class="clr-textarea-wrapper">
                                     <textarea id="vertical-textarea-basic" formControlName="allergies" placeholder="Mention the allergies of patient if any..." class="clr-textarea" cols="70"></textarea>
                                     <clr-icon class="clr-validate-icon" shape="exclamation-circle"></clr-icon>
-
                                 </div>
 
 
                             </div>
                         </div>
-
 
                         <div class="clr-form-control">
                             <label for="vertical-textarea-basic" class="clr-control-label">MEDS</label>
@@ -213,31 +347,14 @@
                                 </div>
 
                             </div>
-                        </div>
-                        <!--<button clrStepButton="next">next</button>-->
+                        </div> -->
+
 
                         <button clrStepButton="submit"><clr-icon shape="success-standard"></clr-icon>&nbsp;&nbsp;submit</button>
                     </clr-step-content>
                 </clr-stepper-panel>
 
-                <!-- <clr-stepper-panel formGroupName="callDetails"> 
-                    <clr-step-title>Call Details</clr-step-title>
-                    
-                    <clr-step-content *clrIfExpanded>
 
-                        <label>Start Time</label>
-                        
-                        <input clrInput formControlName="startTime" />
-
-                        <label>End Time</label>
-                        
-                        <input clrInput formControlName="endTime" />
-                        
-
-
-                        <button clrStepButton="submit"><clr-icon shape="success-standard"></clr-icon>&nbsp;&nbsp;submit</button>
-                    </clr-step-content>
-                </clr-stepper-panel> -->
             </form>
 
         </div>

@@ -1,9 +1,10 @@
+<!--
 <div class="main-container" *ngIf='fetchingData== 0'>
     <span class="spinner">
     Loading...
 </span>
 
-</div>
+</div>-->
 <div class="main-container" *ngIf='fetchingData== 1'>
 
     <div class="content-container">
@@ -86,10 +87,16 @@
                         <clr-input-container>
 
 
-                            <label> Patient Name</label>
+                            <label> Patient First Name</label>
 
-                            <input clrInput formControlName="patientName" />
-                            <clr-control-error *clrIfError="'required'">Patient Name Required</clr-control-error>
+                            <input clrInput formControlName="patientFirstName" />
+                            <clr-control-error *clrIfError="'required'">Patient First Name Required</clr-control-error>
+                        </clr-input-container>
+
+                        <clr-input-container>
+                            <label>Patient Last Name</label>
+                            <input clrInput formControlName="patientLastName" />
+                            <clr-control-error *clrIfError="'required'">Patient Last Name Required</clr-control-error>
                         </clr-input-container>
 
                         <clr-input-container>
@@ -110,7 +117,7 @@
 
                         <clr-input-container>
                             <label>Provider Name</label>
-                            <input clrInput formControlName="providerName" />
+                            <input clrInput formControlName="providerName" readonly value={{username}}/>
                             <clr-control-error *clrIfError="'required'">Provider Name Required</clr-control-error>
                         </clr-input-container>
 

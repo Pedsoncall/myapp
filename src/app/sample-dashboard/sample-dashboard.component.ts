@@ -3,6 +3,7 @@ import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { PatientDetailsService } from '../patient-details.service';
 import { HttpClient } from '@angular/common/http';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-sample-dashboard',
@@ -14,16 +15,19 @@ export class SampleDashboardComponent implements OnInit {
   form: FormGroup;
   timeForm: FormGroup;
   date = new Date().toLocaleString();
-  listOfClients:any;
+  listOfClients: any;
+  username;
   fetchingData = 0;
 
   constructor(private formBuilder: FormBuilder,
     private loginServ: PatientDetailsService,
     private router: Router,
-    private httpclient: HttpClient) {
+    private httpclient: HttpClient,
+    private cook: CookieService) {
       this.fetchingData = 0;
     
-      this.displayStruct = 'searchFields'
+    this.displayStruct = 'searchFields'
+    this.username = this.cook.get('username')
 
       this.httpclient.get('http://44.230.62.224:5000/getClients')
             .toPromise()
@@ -42,9 +46,10 @@ export class SampleDashboardComponent implements OnInit {
     
     this.form = this.formBuilder.group({
       personalDetails: this.formBuilder.group({
-        patientName: ['', Validators.required],
+        patientFirstName: ['', Validators.required],
+        patientLastName: ['', Validators.required],
         callerName: ['', Validators.required],
-        providerName: ['', Validators.required],
+        providerName: [this.username, Validators.required],
         dob: ['', Validators.required],
         phoneNumber : ['',Validators.required],
         startTime: [this.date],
@@ -106,8 +111,7 @@ export class SampleDashboardComponent implements OnInit {
 */
   }
   ngOnInit(): void {
-    //throw new Error("Method not implemented.");
-    
+    //throw new Error("Method not implemented.");   
   }
 
 }

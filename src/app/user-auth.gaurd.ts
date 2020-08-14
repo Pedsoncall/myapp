@@ -20,7 +20,7 @@ export class UserAuthGaurd implements CanActivate {
     
     return this.httpClient.get(
       //'http://44.230.62.224:5000/user_check', 
-      'http://localhost:5000/user_check', 
+      'http://0.0.0.0:5000/user_check', 
     )
     .toPromise()
     .then(response => {

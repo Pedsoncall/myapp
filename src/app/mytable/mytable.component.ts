@@ -101,7 +101,7 @@ export class MytableComponent implements OnInit {
 
   constructor(private httpclient:HttpClient) {
 
-    this.httpclient.get('http://44.230.62.224:5000/getall')
+    this.httpclient.get('http://127.0.0.1:5000/getall')
     .toPromise()
     .then(response => {
 
@@ -118,7 +118,7 @@ export class MytableComponent implements OnInit {
   demo()
   {
     console.log("demo")
-    this.httpclient.get('http://44.230.62.224:5000/getall')
+    this.httpclient.get('http://127.0.0.1:5000/getall')
     .toPromise()
     .then(response => {
 
@@ -194,7 +194,7 @@ export class ButtonViewComponent implements ViewCell, OnInit {
 
     if(this.rowData.role=="admin")
     {
-      this.httpclient.post('http://44.230.62.224:5000/make_user',{'username':this.rowData.username})
+      this.httpclient.post('http://127.0.0.1:5000/make_user',{'username':this.rowData.username})
       .toPromise()
       .then(response => {
 
@@ -205,7 +205,7 @@ export class ButtonViewComponent implements ViewCell, OnInit {
     }
     else if(this.rowData.role=="user")
     {
-      this.httpclient.post('http://44.230.62.224:5000/make_admin',{'username':this.rowData.username})
+      this.httpclient.post('http://127.0.0.1:5000/make_admin',{'username':this.rowData.username})
       .toPromise()
       .then(response => {
 
@@ -258,7 +258,7 @@ export class ButtonViewComponent2 implements ViewCell, OnInit {
 
     if(this.rowData.active==true)
     {
-      this.httpclient.post('http://44.230.62.224:5000/make_in_active',{'username':this.rowData.username})
+      this.httpclient.post('http://127.0.0.1:5000/make_in_active',{'username':this.rowData.username})
       .toPromise()
       .then(response => {
 
@@ -268,7 +268,7 @@ export class ButtonViewComponent2 implements ViewCell, OnInit {
     }
     else if(this.rowData.active==false)
     {
-      this.httpclient.post('http://44.230.62.224:5000/make_active',{'username':this.rowData.username})
+      this.httpclient.post('http://127.0.0.1:5000/make_active',{'username':this.rowData.username})
       .toPromise()
       .then(response => {
 

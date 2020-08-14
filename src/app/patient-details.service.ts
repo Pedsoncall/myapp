@@ -10,11 +10,11 @@ export class PatientDetailsService {
 
   //SERVER_URL = "http://44.230.62.224:5000/forms";
 
-  //registerPatient = "http://localhost:5000/registerPatient";
-  //searchPatient = "http://localhost:5000/searchPatient";
+  registerPatient = "http://localhost:5000/registerPatient";
+  searchPatient = "http://localhost:5000/searchPatient";
 
-  registerPatient = "http://44.230.62.224:5000/registerPatient"
-  searchPatient = "http://44.230.62.224:5000/searchPatient";
+  //registerPatient = "http://44.230.62.224:5000/registerPatient"
+  //searchPatient = "http://44.230.62.224:5000/searchPatient";
 
 
   patientDetails(data) {

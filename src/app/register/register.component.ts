@@ -32,7 +32,7 @@ export class RegisterComponent implements OnInit {
     console.log(this.userdata)
 
     this.httpClient.post(
-      'http://44.230.62.224:5000/register', 
+      'http://127.0.0.1:5000/register', 
        this.userdata,
     )
     .toPromise()

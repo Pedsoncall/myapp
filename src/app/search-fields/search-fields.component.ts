@@ -45,7 +45,7 @@ export class SearchFieldsComponent implements OnInit {
       
     });
 
-    this.httpclient.get('http://44.230.62.224:5000/getClients')
+    this.httpclient.get('http://127.0.0.1:5000/getClients')
             .toPromise()
             .then(response => {
               //console.log(response)
@@ -62,7 +62,7 @@ export class SearchFieldsComponent implements OnInit {
 
     this.show='false'
 
-    this.httpclient.post('http://44.230.62.224:5000/searchPatient',this.searchForm.value)
+    this.httpclient.post('http://127.0.0.1:5000/searchPatient',this.searchForm.value)
             .toPromise()
             .then(response => {
               //console.log(response)

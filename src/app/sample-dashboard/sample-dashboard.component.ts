@@ -29,7 +29,7 @@ export class SampleDashboardComponent implements OnInit {
     this.displayStruct = 'searchFields'
     this.username = this.cook.get('username')
 
-      this.httpclient.get('http://44.230.62.224:5000/getClients')
+      this.httpclient.get('http://localhost:5000/getClients')
             .toPromise()
             .then(response => {
               //console.log(response)

@@ -26,8 +26,8 @@ export class LoginComponent implements OnInit {
     console.log(this.username)
     console.log(this.password)
     this.httpClient.get(
-      'http://44.230.62.224:5000/', 
-    
+      //'http://44.230.62.224:5000/', 
+      'http://127.0.0.1:5000/',
     {
       headers: new HttpHeaders({ 'Authorization': 'Basic '+btoa(this.username+":"+this.password) }),
     }

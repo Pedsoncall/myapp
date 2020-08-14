@@ -84,20 +84,6 @@
                             <input clrInput formControlName="endTime" />
                         </clr-input-container>
                         -->
-                        <clr-input-container>
-
-
-                            <label> Patient First Name</label>
-
-                            <input clrInput formControlName="patientFirstName" />
-                            <clr-control-error *clrIfError="'required'">Patient First Name Required</clr-control-error>
-                        </clr-input-container>
-
-                        <clr-input-container>
-                            <label>Patient Last Name</label>
-                            <input clrInput formControlName="patientLastName" />
-                            <clr-control-error *clrIfError="'required'">Patient Last Name Required</clr-control-error>
-                        </clr-input-container>
 
                         <clr-input-container>
                             <label>Caller Name</label>
@@ -112,6 +98,21 @@
                             <input clrInput formControlName="phoneNumber" />
                             <clr-control-error *clrIfError="'required'">Phone Number Required</clr-control-error>
                         </clr-input-container>
+
+
+                        <clr-input-container>
+                            <label> Patient First Name</label>
+                            <input clrInput formControlName="patientFirstName" />
+                            <clr-control-error *clrIfError="'required'">Patient First Name Required</clr-control-error>
+                        </clr-input-container>
+
+                        <clr-input-container>
+                            <label>Patient Last Name</label>
+                            <input clrInput formControlName="patientLastName" />
+                            <clr-control-error *clrIfError="'required'">Patient Last Name Required</clr-control-error>
+                        </clr-input-container>
+
+                        
 
 
 
@@ -240,8 +241,8 @@
 
                         <div class="clr-form-control">
                             <clr-textarea-container>
-                                <label class="clr-control-label">Diagnosis</label>
-                                <textarea clrTextarea formControlName="diagnosis" placeholder="Mention the medicines of patient if any..." cols="70" required></textarea>
+                                <label class="clr-control-label">PLAN</label>
+                                <textarea clrTextarea formControlName="plan" placeholder="Mention the medicines of patient if any..." cols="70" required></textarea>
                                 <clr-control-helper>Helper text</clr-control-helper>
                                 <clr-control-error>You must provide a description!</clr-control-error>
                             </clr-textarea-container>
@@ -249,12 +250,14 @@
 
                         <div class="clr-form-control">
                             <clr-textarea-container>
-                                <label class="clr-control-label">PLAN</label>
-                                <textarea clrTextarea formControlName="plan" placeholder="Mention the medicines of patient if any..." cols="70" required></textarea>
+                                <label class="clr-control-label">Diagnosis</label>
+                                <textarea clrTextarea formControlName="diagnosis" placeholder="Mention the medicines of patient if any..." cols="70" required></textarea>
                                 <clr-control-helper>Helper text</clr-control-helper>
                                 <clr-control-error>You must provide a description!</clr-control-error>
                             </clr-textarea-container>
                         </div>
+
+                        
 
 
                         <div class="clr-form-control">
@@ -371,11 +374,13 @@
             <app-search-fields></app-search-fields>
         </div>
 
-        <div *ngIf="displayStruct == 'searchFields'" class="content-area">
+        <!--       
+         <div *ngIf="displayStruct == 'searchFields'" class="content-area">
 
 
             <app-search-results></app-search-results>
-        </div>
+        </div> -->
+
 
     </div>
 </div>

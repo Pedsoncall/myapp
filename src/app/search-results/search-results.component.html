@@ -1,21 +1,55 @@
+
+<!--
 <div class="clr-row">
-    <div class="clr-col-lg-13  clr-col-12">
+    <div class="clr-col-lg-13  clr-col-12">   -->
+    
         <div class="card">
             <div class="card-header">
                 <b>SEARCH RESULTS</b>
             </div>
             <div class="card-block">
-                <div class="card-text">
-                    Record 1
-                </div>
-                <div class="card-text">
-                    Record 2
-                </div>
+
+                <table class="table table-noborder">
+                    
+                    <thead>
+                        <tr>
+                            <th>FIRST NAME</th>
+                            <th>LAST NAME</th>
+                            <th>CALLER NAME</th>
+                            <th>ACTION</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+
+                        <tr *ngFor="let one of result" >
+                            <td>  {{ one.personalDetails.patientFirstName }} </td>
+                            <td>  {{ one.personalDetails.patientLastName }} </td>
+                            <td>  {{ one.personalDetails.callerName }} </td>
+                            <td> <button class="btn btn-success-outline"> view record </button></td>
+                        </tr>
+                        
+                    </tbody>
+
+                </table>
+               
+
+               
             </div>
+
             <div class="card-footer">
                 <!--<button class="btn btn-sm btn-link">Footer Action 1</button>
                 <button class="btn btn-sm btn-link">Footer Action 2</button>-->
             </div>
+
+           
+
+           
+
+
         </div>
-    </div>
-</div>
+  
+
+<!--
+     </div>
+</div> -->

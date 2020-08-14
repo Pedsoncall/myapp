@@ -61,7 +61,7 @@ import { TestComponent } from './test/test.component';
     NgOptionHighlightModule,
     
   ],
-  providers: [{provide:HTTP_INTERCEPTORS,useClass:InterceptorService,multi:true},AdminAuthGaurd,UserAuthGaurd,PatientDetailsService],
+  providers: [{provide:HTTP_INTERCEPTORS,useClass:InterceptorService,multi:true},AdminAuthGaurd,UserAuthGaurd,PatientDetailsService,SearchResultsComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

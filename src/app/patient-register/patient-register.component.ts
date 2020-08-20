@@ -30,7 +30,7 @@ export class PatientRegisterComponent implements OnInit {
     this.username = this.cook.get('username')
     this.templateForm.personalDetails.providerName = this.username
     /*
-    this.httpclient.get('http://0.0.0.0:5000/getClients')
+    this.httpclient.get('http://44.230.62.224:5000/getClients')
     .toPromise()
     .then(response => {
     //console.log(response)
@@ -40,7 +40,7 @@ export class PatientRegisterComponent implements OnInit {
           
           })
     */
-    this.httpclient.get('http://0.0.0.0:5000/getClientName')
+    this.httpclient.get('http://44.230.62.224:5000/getClientName')
       .toPromise()
       .then(response => {
       //console.log(response)
@@ -54,7 +54,7 @@ export class PatientRegisterComponent implements OnInit {
 
 
     console.log("dk")
-    this.httpclient.get('http://0.0.0.0:5000/diagCode')
+    this.httpclient.get('http://44.230.62.224:5000/diagCode')
     .toPromise()
     .then(response => {
       this.data1=response;
@@ -156,7 +156,7 @@ export class PatientRegisterComponent implements OnInit {
 
 
   changePCP(client){
-    this.httpclient.get('http://0.0.0.0:5000/getClients',{params:{clientName : client}})
+    this.httpclient.get('http://44.230.62.224:5000/getClients',{params:{clientName : client}})
       .toPromise()
       .then(response => {
       //console.log(response)

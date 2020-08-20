@@ -27,7 +27,7 @@ export class ResetPasswordComponent implements OnInit {
     console.log(this.username)
 
     this.httpClient.post(
-      'http://0.0.0.0:5000/send_otp', 
+      'http://44.230.62.224:5000/send_otp', 
        {"username":this.username},
     )
     .toPromise()
@@ -55,7 +55,7 @@ export class ResetPasswordComponent implements OnInit {
     
 
     this.httpClient.post(
-      'http://0.0.0.0:5000/validate_resetpass_otp', 
+      'http://44.230.62.224:5000/validate_resetpass_otp', 
        {"otp":this.otp,"username":this.username},
     )
     .toPromise()
@@ -82,7 +82,7 @@ export class ResetPasswordComponent implements OnInit {
     if(this.new_password==this.confirm_password && this.new_password!="")
     {
       this.httpClient.post(
-        'http://0.0.0.0:5000/reset_password', 
+        'http://44.230.62.224:5000/reset_password', 
         {"new_password":this.new_password,"username":this.username},
       )
       .toPromise()

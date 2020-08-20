@@ -52,7 +52,7 @@ export class SearchFieldsComponent implements OnInit {
    
 
 
-    this.httpclient.get('http://0.0.0.0:5000/getClientName')
+    this.httpclient.get('http://44.230.62.224:5000/getClientName')
       .toPromise()
       .then(response => {
       //console.log(response)
@@ -63,7 +63,7 @@ export class SearchFieldsComponent implements OnInit {
             
             })
             /*
-    this.httpclient.get('http://0.0.0.0:5000/getClients')
+    this.httpclient.get('http://44.230.62.224:5000/getClients')
             .toPromise()
             .then(response => {
               //console.log(response)
@@ -78,7 +78,7 @@ export class SearchFieldsComponent implements OnInit {
 
 
   changePCP(client){
-    this.httpclient.get('http://0.0.0.0:5000/getClients',{params:{clientName : client}})
+    this.httpclient.get('http://44.230.62.224:5000/getClients',{params:{clientName : client}})
       .toPromise()
       .then(response => {
       //console.log(response)
@@ -95,7 +95,7 @@ export class SearchFieldsComponent implements OnInit {
     this.show='false'
     console.log(this.searchForm)
 
-    this.httpclient.post('http://0.0.0.0:5000/searchPatient',this.searchForm)
+    this.httpclient.post('http://44.230.62.224:5000/searchPatient',this.searchForm)
             .toPromise()
             .then(response => {
               //console.log(response)

@@ -44,7 +44,7 @@ export class SampleDashboardComponent implements OnInit {
     this.displayStruct = 'searchFields'
     this.username = this.cook.get('username')
 
-    this.httpclient.get('http://0.0.0.0:5000/getClients')
+    this.httpclient.get('http://44.230.62.224:5000/getClients')
       .toPromise()
       .then(response => {
       //console.log(response)
@@ -58,7 +58,7 @@ export class SampleDashboardComponent implements OnInit {
 
 
     console.log("dk")
-      this.httpclient.get('http://0.0.0.0:5000/diagCode')
+      this.httpclient.get('http://44.230.62.224:5000/diagCode')
       .toPromise()
       .then(response => {
         this.data1=response;

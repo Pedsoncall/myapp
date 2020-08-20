@@ -15,15 +15,28 @@ export class SearchFieldsComponent implements OnInit {
   
   
   show = 'false'
+  
   result
 
   testData = new BehaviorSubject<Array<any>>([]);
-  searchForm: FormGroup;
   listOfClients
   searchResults
   searchResultsBody
   searchRecords
   fetchingData = 0;
+  listOfClientName
+  displayPCP = 0;
+
+  searchForm = {
+    patientFirstName : '',
+    patientLastName : '',
+    dob : '',
+    clientName : '',
+    pcpName : '',
+    callerNumber : '',
+  };
+
+
   constructor(private formbuilder: FormBuilder,
               private httpclient:HttpClient,
               private loginServ: PatientDetailsService,
@@ -36,15 +49,20 @@ export class SearchFieldsComponent implements OnInit {
     
 
     this.fetchingData = 0;
-    this.searchForm = this.formbuilder.group({
-      patientFirstName: [''],
-      patientLastName: [''],
-      dobSearch: [''],
-      pcpSearch: [''],
-      phoneSearch: [''],
-      
-    });
+   
 
+
+    this.httpclient.get('http://0.0.0.0:5000/getClientName')
+      .toPromise()
+      .then(response => {
+      //console.log(response)
+      this.listOfClientName = response
+      console.log(this.listOfClientName.ClientName)
+      this.fetchingData = 1
+      
+            
+            })
+            /*
     this.httpclient.get('http://0.0.0.0:5000/getClients')
             .toPromise()
             .then(response => {
@@ -53,16 +71,31 @@ export class SearchFieldsComponent implements OnInit {
               console.log(this.listOfClients.Clients)
               this.fetchingData = 1
             })
-
+            */
     console.log("hey there!")
-    console.log(this.searchForm.value)
+    
+  }
+
+
+  changePCP(client){
+    this.httpclient.get('http://0.0.0.0:5000/getClients',{params:{clientName : client}})
+      .toPromise()
+      .then(response => {
+      //console.log(response)
+      this.listOfClients = response
+      console.log(this.listOfClients.Clients)
+      //this.fetchingData = 1
+      this.displayPCP = 1
+            
+            })
   }
 
   onSubmit() {
 
     this.show='false'
+    console.log(this.searchForm)
 
-    this.httpclient.post('http://0.0.0.0:5000/searchPatient',this.searchForm.value)
+    this.httpclient.post('http://0.0.0.0:5000/searchPatient',this.searchForm)
             .toPromise()
             .then(response => {
               //console.log(response)

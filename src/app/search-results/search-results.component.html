@@ -2,20 +2,21 @@
 <!--
 <div class="clr-row">
     <div class="clr-col-lg-13  clr-col-12">   -->
-    
+        <!--        <div class="limit-height">
         <div class="card">
             <div class="card-header">
-                <b>SEARCH RESULTS</b>
+                <b>RECORDS FOUND</b>
             </div>
             <div class="card-block">
 
-                <table class="table table-noborder">
+                <table class="table table-noborder" *ngIf='result.length!=0;else elseBlock'>
                     
                     <thead>
                         <tr>
-                            <th>FIRST NAME</th>
-                            <th>LAST NAME</th>
-                            <th>CALLER NAME</th>
+                            <th>PATIENT NAME</th>
+                            <th>PATIENT DOB</th>
+                            <th>PCP NAME</th>
+                            <th>TIME</th>
                             <th>ACTION</th>
                         </tr>
                     </thead>
@@ -23,23 +24,26 @@
                     <tbody>
 
                         <tr *ngFor="let one of result" >
-                            <td>  {{ one.personalDetails.patientFirstName }} </td>
-                            <td>  {{ one.personalDetails.patientLastName }} </td>
-                            <td>  {{ one.personalDetails.callerName }} </td>
-                            <td> <button class="btn btn-success-outline"> view record </button></td>
+                            <td>  {{ one.personalDetails.patientFirstName+' '+one.personalDetails.patientLastName }} </td>
+                            <td>  {{ one.personalDetails.dob }} </td>
+                            <td>  {{ one.personalDetails.pcp }} </td>
+                            <td>   {{ one.personalDetails.consultationStartTime }}</td>
+                            <td> <button class="btn btn-success-outline" (click)="display(one)" > view record </button></td>
                         </tr>
                         
                     </tbody>
 
                 </table>
+
+                <ng-template #elseBlock> No records found </ng-template>
                
 
                
             </div>
 
             <div class="card-footer">
-                <!--<button class="btn btn-sm btn-link">Footer Action 1</button>
-                <button class="btn btn-sm btn-link">Footer Action 2</button>-->
+                <button class="btn btn-sm btn-link">Footer Action 1</button>
+                <button class="btn btn-sm btn-link">Footer Action 2</button>
             </div>
 
            
@@ -48,8 +52,103 @@
 
 
         </div>
+
+    </div>-->
+
+
+        <div class="limit-height">
+            <clr-datagrid>
+                <clr-dg-column [clrDgField]="'result.personalDetails.patientFirstName'" >Patient Name</clr-dg-column>
+                <clr-dg-column [clrDgField]="'name'">PATIENT DOB</clr-dg-column>
+                <clr-dg-column [clrDgField]="'creation'">PCP NAME</clr-dg-column>
+                <clr-dg-column [clrDgField]="'pokemon.name'">TIME</clr-dg-column>
+                <clr-dg-column [clrDgField]="'color'">ACTION</clr-dg-column>
+                
+            
+                <clr-dg-row *clrDgItems="let one of result">
+                    <clr-dg-cell>{{ one.personalDetails.patientFirstName +' ' + one.personalDetails.patientLastName }}</clr-dg-cell>
+                    <clr-dg-cell>{{ one.personalDetails.dob }}</clr-dg-cell>
+                    <clr-dg-cell>{{ one.personalDetails.pcp }}</clr-dg-cell>
+                    <clr-dg-cell>{{ one.personalDetails.consultationStartTime }}</clr-dg-cell>
+                    <clr-dg-cell>
+                        <button class="btn btn-success-outline" (click)="display(one)" > view record </button>
+                    </clr-dg-cell>
+                </clr-dg-row>
+            
+                <!--<clr-dg-footer>{{users.length}} users</clr-dg-footer>-->
+            </clr-datagrid>
+        </div>
+<!--
+  <app-patient-record [record]="record" *ngIf="showrecord=='true'"> 
+
+    {{ record }}
+    <p>hehe</p>
+    
+  </app-patient-record>
+-->
   
+<div class="clr-row" *ngIf="showRecord=='true'">
+    <div class="clr-col-lg-13  clr-col-12">
+        <div class="card">
+            <div class="card-header">
+                Patient Record Details
+            </div>
+            <div class="card-block">
+                <p>Consultation Start Time : {{record.personalDetails.consultationStartTime}}</p>
+                <p>Consultation End Time : {{record.personalDetails.consultationEndTime}}</p>
+                <p>Patient First Name : {{record.personalDetails.patientFirstName}}</p>
+                <p>Patient Last Name : {{record.personalDetails.patientLastName}}</p>
+                <p>Caller Name : {{record.personalDetails.callerName}}</p>
+                <p>Caller Number : {{record.personalDetails.callerNumber}}</p>
+                <p>Provider Name : {{record.personalDetails.providerName}}</p>
+                <p>Date Of Birth : {{record.personalDetails.dob}} </p>
+                <p>Client Name : {{record.personalDetails.client}}</p>
+                <p>PCP Name : {{record.personalDetails.pcp}} </p>
+            </div>
+            <div class="card-block">
+                <h4>Allergies</h4>
+                <p>{{record.medicalDetails.allergies}}</p>
+                <h4>MEDS</h4>
+                <p>{{record.medicalDetails.meds}}</p>
+                <h4>PMH</h4>
+                <p>{{record.medicalDetails.pmh}}</p>
+                <h4>FH</h4>
+                <p>{{record.medicalDetails.fh}}</p>
+                <h4>SH</h4>
+                <p>{{record.medicalDetails.sh}}</p>
+                <h4>CC</h4>
+                <p>{{record.medicalDetails.cc}}</p>
+                <h4>HPI</h4>
+                <p>{{record.medicalDetails.hpi}}</p>
+                <h4>ROS</h4>
+                <p>{{record.medicalDetails.ros}}</p>
+                <h4>Exam</h4>
+                <p>{{record.medicalDetails.exam}}</p>
+                <h4>Plan</h4>
+                <p>{{record.medicalDetails.plan}}</p>
+                <h4>Diagnosis</h4>
+                <ul class="list">
+                    <li *ngFor="let diag of record.medicalDetails.search"> {{diag}}</li>
+                </ul>
+                <h4>CPT</h4>
+                <p>{{record.medicalDetails.coding}}</p>
+                
+            </div>
+            <div class="card-footer">
+                <a class="btn btn-primary" (click)="autoFormFill(record)">Edit Details</a>
+            </div>
+        </div>
+    </div>
 
 <!--
      </div>
 </div> -->
+
+<div *ngIf="editRecord=='true'" >
+  <app-patient-record [record]="record" > 
+
+    {{ record }}
+    <p>hehe</p>
+    
+  </app-patient-record>
+</div>

@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-search-results',
@@ -8,13 +8,38 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class SearchResultsComponent implements OnInit {
   
-
+  constructor(private router:Router) {}
 
   @Input() result:any;
 
-  constructor() {}
+  record = null
+  showRecord='false'
+  editRecord='false'
+  
   ngOnInit(): void {}
 
  
-  
+  display(one)
+  {
+    this.record = null
+    this.showRecord='false'
+    this.editRecord='false'
+
+    this.record=one
+    console.log(one);
+    this.showRecord='true'
+  }
+
+  autoFormFill(record){
+
+    this.record=record;
+    console.log(record);
+    this.editRecord='true'
+    this.showRecord='false'
+    
+    
+  }
+
+
+
 }

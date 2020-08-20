@@ -31,6 +31,13 @@ import { Ng2SmartTableModule } from 'ng2-smart-table';
 import { CommonModule } from '@angular/common';
 import { PatientDetailsService } from './patient-details.service';
 import { TestComponent } from './test/test.component';
+import { PatientRecordComponent } from './patient-record/patient-record.component';
+
+import { VirtualScrollerModule } from 'ngx-virtual-scroller';
+import { Test2Component } from './test2/test2.component';
+import { PatientRegisterComponent } from './patient-register/patient-register.component';
+//import { PhoneMaskDirective } from './phone-mask.directive';
+import { DatePipe } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -45,7 +52,11 @@ import { TestComponent } from './test/test.component';
     SampleDashboardComponent,
     SearchFieldsComponent,
     SearchResultsComponent,
-    TestComponent
+    TestComponent,
+    PatientRecordComponent,
+    Test2Component,
+    //PhoneMaskDirective,
+    PatientRegisterComponent
   ],
   imports: [
     BrowserModule,
@@ -59,9 +70,13 @@ import { TestComponent } from './test/test.component';
     CommonModule,
     NgSelectModule,
     NgOptionHighlightModule,
+    VirtualScrollerModule
     
   ],
-  providers: [{provide:HTTP_INTERCEPTORS,useClass:InterceptorService,multi:true},AdminAuthGaurd,UserAuthGaurd,PatientDetailsService,SearchResultsComponent],
+  exports: [
+    //PhoneMaskDirective
+  ],
+  providers: [{provide:HTTP_INTERCEPTORS,useClass:InterceptorService,multi:true},DatePipe,AdminAuthGaurd,UserAuthGaurd,PatientDetailsService,SearchResultsComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

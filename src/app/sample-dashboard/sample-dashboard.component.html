@@ -248,16 +248,41 @@
                             </clr-textarea-container>
                         </div>
 
-                        <div class="clr-form-control">
-                            <clr-textarea-container>
-                                <label class="clr-control-label">Diagnosis</label>
-                                <textarea clrTextarea formControlName="diagnosis" placeholder="Mention the medicines of patient if any..." cols="70" required></textarea>
-                                <clr-control-helper>Helper text</clr-control-helper>
-                                <clr-control-error>You must provide a description!</clr-control-error>
-                            </clr-textarea-container>
-                        </div>
-
+                        <form>
+                        <clr-input-container>
+                            <label for="search_input">Diagnosis</label>
+                            <!--<input clrInput formControlName="diagnosis" />-->
+                            <input id="search_input" clrInput type="text" formControlName="search"  placeholder="Search for keywords...">
+                            <clr-control-error *clrIfError="'required'">Caller Name Required</clr-control-error>
+                            
+                        </clr-input-container>
+                        <!--<button clrStepButton="next" (click)="myfunc()">next</button>-->
+                        <button class="btn btn-primary" (click)="myfunc()">Search</button>
                         
+                    </form>
+                        
+                        
+                        
+                        <div *ngIf = "viewVirtualScroll == true">
+                        <cdk-virtual-scroll-viewport #scroll2 [items]="myForm1.controls.useremail.value">
+                            <div *ngFor="let data2 of scroll2.viewPortItems">
+                                <input type="checkbox" (change)="onChange2(data2, $event.target.checked)" > {{ data2 }}<br>
+                            </div>
+                            
+                        </cdk-virtual-scroll-viewport>
+
+                    </div>
+                
+                        <br>
+                        <br>
+                        <div *ngIf = "resultsOfVirtualScroll == true">
+                        <virtual-scroller   #scroll1 [items]="myForm.controls.useremail.value">
+                            <div *ngFor="let data1 of scroll1.viewPortItems">
+                                <input type="checkbox" (change)="onChange1(data1, $event.target.checked)" checked > {{ data1 }}<br>
+                            </div>
+                            
+                        </virtual-scroller>
+                    </div>
 
 
                         <div class="clr-form-control">

@@ -1,0 +1,309 @@
+
+<div class="main-container" *ngIf='fetchingData== 1'>
+    <div class="content-container">
+        <nav class="sidenav">
+            <section class="sidenav-content">
+                <a class="nav-link">
+                    <button class="btn btn-primary" (click)="displayMode()">New Registration</button>
+                </a>
+                <a class="nav-link">
+                    <button class="btn btn-primary" (click)="displayMode1()">Search Patient</button>
+                </a>
+                <!--
+                <a class="nav-link">
+                    <button class="btn btn-primary" (click)="diagCodeTest()">Diag Code</button>
+                </a>
+                -->
+                <section class="nav-group collapsible">
+                    <input id="tabexample1" type="checkbox">
+                    <label for="tabexample1">Manage Account</label>
+                    <ul class="nav-list">
+                        <li><a class="nav-link">Reset Password</a></li>
+                    </ul>
+                </section>
+            </section>
+        </nav>
+
+
+
+
+        <div *ngIf="displayStruct == 'patreg'" class="content-area" style="padding-right: 10%;">
+
+            <div class="clr-row">
+                <div class="clr-col-lg-5  clr-col-12"> 
+                    <clr-input-container>
+                        <label>Consultation Start Time</label>
+                        <input clrInput type="datetime" [(ngModel)]="templateForm.personalDetails.consultationStartTime" name="consultationStartTime" required />
+                    </clr-input-container>
+                </div>
+                <div class="clr-col-lg-5  clr-col-12">
+                    <div class="clr-row">
+                        <div class="clr-col-lg-5  clr-col-12">
+                            <clr-input-container>
+                                <label>Consultation End Time</label>
+                                <input clrInput [(ngModel)]="templateForm.personalDetails.consultationEndTime" name="consultationEndTime" required/>
+                            </clr-input-container>
+                        </div>
+                        <div class="clr-col-lg-5  clr-col-12" style="padding-top: 5%;">
+                            <button class="btn btn-primary" type="button" (click)="endTime()">End Time</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br>
+            <form clrStepper class="clr-form" #patientForm="ngForm" (keydown.enter)="$event.preventDefault()" (ngSubmit)="onSubmit1()">
+                <clr-stepper-panel ngModelGroup="personalDetails">
+                <clr-step-title>Patient Details</clr-step-title>
+                <clr-step-description>Fill the details of patients.</clr-step-description>
+                <clr-step-content clrForm>
+
+
+                    <clr-input-container>
+                        <label>Caller Name</label>
+                        <input clrInput [(ngModel)]="templateForm.personalDetails.callerName" name="callerName"  required />
+                    </clr-input-container>
+                    <clr-input-container>
+                        <label>Caller Number</label>
+                        <!--<input clrInput [(ngModel)]="templateForm.personalDetails.callerNumber" name="callerNumber" required />-->
+                        <input clrInput class="form-control"  type="text" [(ngModel)]="templateForm.personalDetails.callerNumber" name="callerNumber"> 
+                    </clr-input-container>
+                    <clr-input-container>
+                    <label>Patient First Name</label>
+                    <input clrInput [(ngModel)]="templateForm.personalDetails.patientFirstName" name="patientFirstName" required />
+                    </clr-input-container>
+            
+                    <clr-input-container>
+                    <label>Patient Last Name</label>
+                    <input clrInput [(ngModel)]="templateForm.personalDetails.patientLastName" name="patientLastName" required />
+                    </clr-input-container>
+
+                    <clr-input-container>
+                        <label>Provider Name</label>
+                        <input clrInput [(ngModel)]="templateForm.personalDetails.providerName" name="providerName" readonly value={{username}} required />
+                    </clr-input-container>
+
+                    <clr-date-container>
+                        <label>Date Of Birth</label>
+                        <input [(ngModel)]="templateForm.personalDetails.dob" type="date" clrDate name="dob">
+                        <clr-control-error *clrIfError="'required'">Date Of Birth Required</clr-control-error>
+                    </clr-date-container>
+
+
+                    <clr-select-container>
+                        <label>Select the Client Name</label>
+                        <select [(ngModel)]="templateForm.personalDetails.client" clrSelect name="client" (change)="changePCP($event.target.value)">
+                            <option value="">Select the Client</option>
+                            <option  *ngFor="let names of listOfClientName.ClientName;" [value]="names">
+                                {{names}}
+                            </option>
+                        </select>
+                    </clr-select-container>
+                    <div *ngIf = "displayPCP == 1">
+                        <clr-select-container>
+                            <label>Select the PCP</label>
+                            <select [(ngModel)]="templateForm.personalDetails.pcp" clrSelect name="pcp">
+                                <option value="">Select the PCP</option>
+                                <option  *ngFor="let order of listOfClients.Clients;" [value]="order">
+                                    {{order}}
+                                </option>
+                            </select>
+                        </clr-select-container>
+                    </div>
+                    <button clrStepButton="next">next</button>
+                </clr-step-content>
+                </clr-stepper-panel>
+            
+                <clr-stepper-panel ngModelGroup="medicalDetails">
+                <clr-step-title>Medical Details</clr-step-title>
+                <clr-step-description>Fill the Medical information of the patient</clr-step-description>
+                <clr-step-content>
+                    
+
+
+                    <div class="clr-form-control">
+                        <clr-textarea-container>
+                            <label class="clr-control-label">Allergies</label>
+                            <textarea clrTextarea [(ngModel)]="templateForm.medicalDetails.allergies" name="allergies" placeholder="Mention the allergies of patient if any..." cols="70" required></textarea>
+                            <clr-control-helper>Helper text</clr-control-helper>
+                            <clr-control-error>You must provide a description!</clr-control-error>
+                        </clr-textarea-container>
+                    </div>
+
+
+                    <div class="clr-form-control">
+                        <clr-textarea-container>
+                            <label class="clr-control-label">MEDS</label>
+                            <textarea clrTextarea [(ngModel)]="templateForm.medicalDetails.meds" name="meds" placeholder="Mention the medicines of patient if any..." cols="70" required></textarea>
+                            <clr-control-helper>Helper text</clr-control-helper>
+                            <clr-control-error>You must provide a description!</clr-control-error>
+                        </clr-textarea-container>
+                    </div>
+
+
+
+                    <div class="clr-form-control">
+                        <clr-textarea-container>
+                            <label class="clr-control-label">PMH</label>
+                            <textarea clrTextarea [(ngModel)]="templateForm.medicalDetails.pmh" name="PMH" placeholder="Mention the medicines of patient if any..." cols="70" required></textarea>
+                            <clr-control-helper>Helper text</clr-control-helper>
+                            <clr-control-error>You must provide a description!</clr-control-error>
+                        </clr-textarea-container>
+                    </div>
+
+
+                    <div class="clr-form-control">
+                        <clr-textarea-container>
+                            <label class="clr-control-label">FH</label>
+                            <textarea clrTextarea [(ngModel)]="templateForm.medicalDetails.fh" name="fh" placeholder="Mention the medicines of patient if any..." cols="70" required></textarea>
+                            <clr-control-helper>Helper text</clr-control-helper>
+                            <clr-control-error>You must provide a description!</clr-control-error>
+                        </clr-textarea-container>
+                    </div>
+
+                    <div class="clr-form-control">
+                        <clr-textarea-container>
+                            <label class="clr-control-label">SH</label>
+                            <textarea clrTextarea [(ngModel)]="templateForm.medicalDetails.sh" name="sh" placeholder="Mention the medicines of patient if any..." cols="70" required></textarea>
+                            <clr-control-helper>Helper text</clr-control-helper>
+                            <clr-control-error>You must provide a description!</clr-control-error>
+                        </clr-textarea-container>
+                    </div>
+
+
+                    <div class="clr-form-control">
+                        <clr-textarea-container>
+                            <label class="clr-control-label">CC</label>
+                            <textarea clrTextarea [(ngModel)]="templateForm.medicalDetails.cc" name="cc" placeholder="Mention the medicines of patient if any..." cols="70" required></textarea>
+                            <clr-control-helper>Helper text</clr-control-helper>
+                            <clr-control-error>You must provide a description!</clr-control-error>
+                        </clr-textarea-container>
+                    </div>
+
+                    <div class="clr-form-control">
+                        <clr-textarea-container>
+                            <label class="clr-control-label">HPI</label>
+                            <textarea clrTextarea [(ngModel)]="templateForm.medicalDetails.hpi" name="hpi" placeholder="Mention the medicines of patient if any..." cols="70" required></textarea>
+                            <clr-control-helper>Helper text</clr-control-helper>
+                            <clr-control-error>You must provide a description!</clr-control-error>
+                        </clr-textarea-container>
+                    </div>
+
+                    <div class="clr-form-control">
+                        <clr-textarea-container>
+                            <label class="clr-control-label">ROS</label>
+                            <textarea clrTextarea [(ngModel)]="templateForm.medicalDetails.ros" name="ros" placeholder="Mention the medicines of patient if any..." cols="70" required></textarea>
+                            <clr-control-helper>Helper text</clr-control-helper>
+                            <clr-control-error>You must provide a description!</clr-control-error>
+                        </clr-textarea-container>
+                    </div>
+
+                    <div class="clr-form-control">
+                        <clr-textarea-container>
+                            <label class="clr-control-label">EXAM</label>
+                            <textarea clrTextarea [(ngModel)]="templateForm.medicalDetails.exam" name="exam" placeholder="Mention the medicines of patient if any..." cols="70" required></textarea>
+                            <clr-control-helper>Helper text</clr-control-helper>
+                            <clr-control-error>You must provide a description!</clr-control-error>
+                        </clr-textarea-container>
+                    </div>
+
+                    <div class="clr-form-control">
+                        <clr-textarea-container>
+                            <label class="clr-control-label">PLAN</label>
+                            <textarea clrTextarea [(ngModel)]="templateForm.medicalDetails.plan" name="plan" placeholder="Mention the medicines of patient if any..." cols="70" required></textarea>
+                            <clr-control-helper>Helper text</clr-control-helper>
+                            <clr-control-error>You must provide a description!</clr-control-error>
+                        </clr-textarea-container>
+                    </div>
+
+                    <div class="clr-row">
+                        <div class="clr-col-lg-5  clr-col-12" > 
+                            <clr-input-container >
+                                <label for="search_input">Diagnosis</label>
+                                <input id="search_input" size="50" clrInput (keydown.enter)="myfunc()" type="text" [(ngModel)]="templateForm.medicalDetails.search" name="search" placeholder="Search for keywords...">
+                                <clr-control-error *clrIfError="'required'">Caller Name Required</clr-control-error>
+                            </clr-input-container>
+                        </div>
+                        <div class="clr-col-lg-5  clr-col-12" style="padding-top: 2%;">                           
+                            <button class="btn btn-primary" type="button" (click)="myfunc()">Search</button>
+                        </div>
+                    </div>
+                    
+                    
+                    <br>
+                    <div class="clr-row">
+                            <div class="clr-col-lg-5  clr-col-12" *ngIf="viewVirtualScroll==true"> 
+                                <virtual-scroller   #scroll2 [items]="myForm1.controls.useremail.value">
+                                    <div *ngFor="let data2 of scroll2.viewPortItems">
+                                        <input type="checkbox" (change)="onChange2(data2, $event.target.checked)" > {{ data2 }}<br>
+                                    </div>    
+                                </virtual-scroller >
+                            </div>
+                        <div class="clr-col-lg-5  clr-col-12" *ngIf="resultsOfVirtualScroll==true">   
+                            <virtual-scroller   #scroll1 [items]="myForm.controls.useremail.value">
+                                <div *ngFor="let data1 of scroll1.viewPortItems">
+                                    <input type="checkbox" (change)="onChange1(data1, $event.target.checked)" checked > {{ data1 }}<br>
+                                </div>
+                            </virtual-scroller>
+                        </div>
+                    
+                    </div>
+
+                    <!--
+
+                    <div class="clr-form-control">
+                        <clr-textarea-container>
+                            <label class="clr-control-label">Coding</label>
+                            <textarea clrTextarea [(ngModel)]="templateForm.medicalDetails.coding" name="coding" placeholder="Mention the medicines of patient if any..." cols="70" required></textarea>
+                            <clr-control-helper>Helper text</clr-control-helper>
+                            <clr-control-error>You must provide a description!</clr-control-error>
+                        </clr-textarea-container>
+                    </div>
+
+                    -->
+
+                    <div class="clr-row">
+                        <div class="clr-col-lg-5  clr-col-12" > 
+                            <clr-input-container >
+                                <label for="search_input">CPT</label>
+                                <input id="search_input" size="50" clrInput (keydown.enter)="codingFunc()" type="text" [(ngModel)]="templateForm.medicalDetails.coding" name="coding" placeholder="coding..">
+                                <clr-control-error *clrIfError="'required'"> Required</clr-control-error>
+                            </clr-input-container>
+                        </div>
+                        <div class="clr-col-lg-5  clr-col-12" style="padding-top: 2%;">                           
+                            <button class="btn btn-primary" type="button" (click)="codingFunc()">Search</button>
+                        </div>
+                    </div>
+
+                    <div *ngIf="displayCPTList==1" class="CPTDropDown">
+                        <clr-select-container active>
+                            <select [(ngModel)]="templateForm.medicalDetails.coding" clrSelect name="coding" size="10" (change)="changeViewOfCPT()">
+                                <option  *ngFor="let codes of myForm2.controls.useremail.value;" [value]="codes">
+                                    {{codes}}
+                                </option>
+                            </select>
+                        </clr-select-container>
+                    </div>
+                    <!--
+                    <virtual-scroller   #scroll3 [items]="myForm2.controls.useremail.value" *ngIf="resultOfCoding==true" style="width: 60%;">
+                        <div *ngFor="let data3 of scroll3.viewPortItems"> 
+                            <input type="radio" (change)="onChange3(data2, $event.target.checked)" > {{ data3 }}<br>
+                        </div>    
+                    </virtual-scroller >
+                    -->
+
+
+
+
+                    <button clrStepButton="submit"><clr-icon shape="success-standard"></clr-icon>&nbsp;&nbsp;submit</button>
+                </clr-step-content>
+                </clr-stepper-panel>
+            </form>
+
+        </div>
+
+        <div *ngIf="displayStruct == 'searchFields'" class="content-area">
+            <!-- <button class="btn btn-primary" (click)="displayMode()">New Registration</button> -->
+            <app-search-fields></app-search-fields>
+        </div>
+    </div>
+</div>

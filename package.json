@@ -29,6 +29,7 @@
     "ng-multiselect-dropdown": "^0.2.10",
     "ng2-smart-table": "^1.6.0",
     "ngx-cookie-service": "^3.0.4",
+    "ngx-virtual-scroller": "^4.0.3",
     "rxjs": "~6.5.5",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.3"

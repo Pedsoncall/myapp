@@ -14,6 +14,7 @@ import { UserAuthGaurd } from './user-auth.gaurd';
 import { MytableComponent } from './mytable/mytable.component';
 import {AdminAccountComponent} from './admin-account/admin-account.component'
 import { TestComponent } from './test/test.component';
+import { PatientRegisterComponent } from './patient-register/patient-register.component'
 //import { ButtonViewComponent } from './mytable/mytable.component'
 //import {BasicExampleButtonViewComponent} from './mytable/mytable.component'
 
@@ -107,8 +108,12 @@ const routes: Routes = [
   {
     path:'dd',
     component:TestComponent
-  }
+  },
 
+  {
+    path:'form',
+    component: PatientRegisterComponent
+  }
 
 ];
 

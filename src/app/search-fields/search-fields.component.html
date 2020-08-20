@@ -2,15 +2,15 @@
     Loading...
 </span>
 <div class="clr-row">
-    <div class="clr-col-lg-6 clr-col-12">
+    <div class="clr-col-lg-4 clr-col-12">
         <div class="card">
             <div class="card-header">
-                <b>SEARCH FOR AN EXISTING PATIENT</b>
+                <b>SEARCH PATIENT</b>
             </div>
             <div class="card-block">
 
 
-                <form [formGroup]="searchForm"  *ngIf='fetchingData== 1' (ngSubmit)="onSubmit()">
+                <form class="clr-form" #searchingForm="ngForm" (keydown.enter)="$event.preventDefault()" *ngIf='fetchingData== 1' (ngSubmit)="onSubmit()">
 
                     <!--
                     <span for="basic">Basic Input</span>
@@ -20,16 +20,16 @@
                     -->
 
                     <clr-input-container>
-                        <label>Enter Patient First Name</label>
-                        <input clrInput formControlName="patientFirstName" />
+                        <label>Patient First Name</label>
+                        <input clrInput [(ngModel)]="searchForm.patientFirstName" name="patientFirstName" />
                     </clr-input-container>
                     <clr-input-container>
-                        <label>Enter Patient Last Name</label>
-                        <input clrInput formControlName="patientLastName" />
+                        <label>Patient Last Name</label>
+                        <input clrInput [(ngModel)]="searchForm.patientLastName" name="patientLastName" />
                     </clr-input-container>
                     <clr-date-container>
                         <label>Date Of Birth</label>
-                        <input formControlName="dobSearch" type="date" clrDate name="dob">
+                        <input [(ngModel)]="searchForm.dob" name="dob" type="date" clrDate>
                         <clr-control-error *clrIfError="'required'">Date Of Birth Required</clr-control-error>
                     </clr-date-container>
                     <!--
@@ -44,19 +44,30 @@
                     </clr-select-container>
                     -->
                     <clr-select-container>
-                        <label>Select the PCP</label>
-                        <select formControlName="pcpSearch" clrSelect name="options">
-                            <option value="">Select the PCP</option>
-                            <option  *ngFor="let order of listOfClients.Clients;" [value]="order">
-                                {{order}}
-                              </option>
+                        <label>Select the Client Name</label>
+                        <select [(ngModel)]="searchForm.clientName" name="clientName" clrSelect  (change)="changePCP($event.target.value)">
+                            <option value="">Select the Client</option>
+                            <option  *ngFor="let names of listOfClientName.ClientName;" [value]="names">
+                                {{names}}
+                            </option>
                         </select>
                     </clr-select-container>
+                    <div *ngIf = "displayPCP == 1">
+                        <clr-select-container>
+                            <label>Select the PCP</label>
+                            <select [(ngModel)]="searchForm.pcpName" clrSelect name="pcpName">
+                                <option value="">Select the PCP</option>
+                                <option  *ngFor="let order of listOfClients.Clients;" [value]="order">
+                                    {{order}}
+                                </option>
+                            </select>
+                        </clr-select-container>
+                    </div>
                     <!--<app-search-results [testDataInput] = "testData | async"></app-search-results>
                     <p>{{ testData | async }}</p>-->
                     <clr-input-container>
                         <label>Enter Caller Number</label>
-                        <input clrInput formControlName="phoneSearch" />
+                        <input clrInput [(ngModel)]="searchForm.callerNumber" name="callerNumber"/>
                     </clr-input-container>
                     <br>
                     <button type="submit" class="btn btn-success-outline">Search</button>
@@ -75,7 +86,7 @@
         
     </div>
 
-    <app-search-results  [result]="result" *ngIf="show=='true'" class="clr-col-lg-6 clr-col-12" >
+    <app-search-results  [result]="result" *ngIf="show=='true'" class="clr-col-lg-8 clr-col-6" >
 
 
     </app-search-results>

@@ -50,7 +50,7 @@ export class LoginComponent implements OnInit {
       else if(this.data.role=='user')
       {
         console.log("user")
-        this.router.navigate(['user_dashboard']);
+        this.router.navigate(['user_dashboard_new/search']);
       }
 
     })

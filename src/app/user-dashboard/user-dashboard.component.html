@@ -1,30 +1,31 @@
-<header class="header-6">
+<div class="animated fadeInDown" id="navbar" (scroll)="onWindowScroll($event);">
+    <header class="header-6">
 
-    <div class="branding">
-        <a href="javascript://" class="nav-link">
-            <span class="title">MY APP USER</span>
-        </a>
-    </div>
+        <div class="branding">
+            <a href="javascript://" class="nav-link">
+                <span class="title">MY APP USER</span>
+            </a>
+        </div>
 
 
 
-    <div class="header-actions">
-        <clr-dropdown>
-            <button class="nav-text" clrDropdownTrigger aria-label="open user profile">
-                <clr-icon shape="user"></clr-icon>
-                {{username}}
-                <clr-icon shape="caret down"></clr-icon>
-            </button>
-            <clr-dropdown-menu *clrIfOpen clrPosition="bottom-right">
-                <a clrDropdownItem>My account</a>
+        <div class="header-actions">
+            <clr-dropdown>
+                <button class="nav-text" clrDropdownTrigger aria-label="open user profile">
+                    <clr-icon shape="user"></clr-icon>
+                    {{username}}
+                    <clr-icon shape="caret down"></clr-icon>
+                </button>
+                <clr-dropdown-menu *clrIfOpen clrPosition="bottom-right">
+                    <a clrDropdownItem>My account</a>
 
-                <a clrDropdownItem (click)="logout()">Log out</a>
-            </clr-dropdown-menu>
-        </clr-dropdown>
-    </div>
+                    <a clrDropdownItem (click)="logout()">Log out</a>
+                </clr-dropdown-menu>
+            </clr-dropdown>
+        </div>
 
-</header>
-
+    </header>
+</div>
 <!--
 <nav class="subnav">
     <ul class="nav">
@@ -47,4 +48,3 @@
 
 
 
-<router-outlet></router-outlet>

@@ -38,6 +38,12 @@ import { Test2Component } from './test2/test2.component';
 import { PatientRegisterComponent } from './patient-register/patient-register.component';
 //import { PhoneMaskDirective } from './phone-mask.directive';
 import { DatePipe } from '@angular/common';
+import { DisplayrecordComponent } from './displayrecord/displayrecord.component';
+import { UserDashBoardNewComponent } from './user-dash-board-new/user-dash-board-new.component';
+import { PatientRegisterNewComponent } from './patient-register-new/patient-register-new.component';
+import { SearchFieldsNewComponent } from './search-fields-new/search-fields-new.component';
+import { SearchResultsNewComponent } from './search-results-new/search-results-new.component';
+import { PreviewRecordComponent } from './preview-record/preview-record.component';
 
 @NgModule({
   declarations: [
@@ -56,7 +62,13 @@ import { DatePipe } from '@angular/common';
     PatientRecordComponent,
     Test2Component,
     //PhoneMaskDirective,
-    PatientRegisterComponent
+    PatientRegisterComponent,
+    DisplayrecordComponent,
+    UserDashBoardNewComponent,
+    PatientRegisterNewComponent,
+    SearchFieldsNewComponent,
+    SearchResultsNewComponent,
+    PreviewRecordComponent
   ],
   imports: [
     BrowserModule,

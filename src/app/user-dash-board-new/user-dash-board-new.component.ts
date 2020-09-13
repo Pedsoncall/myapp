@@ -3,11 +3,11 @@ import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 
 @Component({
-  selector: 'app-user-dashboard',
-  templateUrl: './user-dashboard.component.html',
-  styleUrls: ['./user-dashboard.component.css']
+  selector: 'app-user-dash-board-new',
+  templateUrl: './user-dash-board-new.component.html',
+  styleUrls: ['./user-dash-board-new.component.css']
 })
-export class UserDashboardComponent implements OnInit {
+export class UserDashBoardNewComponent implements OnInit {
 
   constructor(private router: Router,
     private cook: CookieService) { }

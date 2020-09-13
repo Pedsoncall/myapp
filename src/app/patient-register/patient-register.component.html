@@ -26,8 +26,8 @@
 
 
 
-
-        <div *ngIf="displayStruct == 'patreg'" class="content-area" style="padding-right: 10%;">
+    <div class="content-area">
+        <div *ngIf="displayStruct == 'patreg'"  id="navbar" (scroll)="onWindowScroll($event);">
 
             <div class="clr-row">
                 <div class="clr-col-lg-5  clr-col-12"> 
@@ -297,13 +297,21 @@
                     <button clrStepButton="submit"><clr-icon shape="success-standard"></clr-icon>&nbsp;&nbsp;submit</button>
                 </clr-step-content>
                 </clr-stepper-panel>
+
+                Message from Service : {{message}}
+
             </form>
 
         </div>
 
-        <div *ngIf="displayStruct == 'searchFields'" class="content-area">
+        <div *ngIf="displayStruct == 'searchFields'" >
             <!-- <button class="btn btn-primary" (click)="displayMode()">New Registration</button> -->
             <app-search-fields></app-search-fields>
         </div>
+
+        <router-outlet></router-outlet>
+
+
+    </div>  
     </div>
 </div>

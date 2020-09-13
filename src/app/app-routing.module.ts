@@ -15,6 +15,12 @@ import { MytableComponent } from './mytable/mytable.component';
 import {AdminAccountComponent} from './admin-account/admin-account.component'
 import { TestComponent } from './test/test.component';
 import { PatientRegisterComponent } from './patient-register/patient-register.component'
+import { DisplayrecordComponent } from './displayrecord/displayrecord.component';
+import { UserDashBoardNewComponent } from './user-dash-board-new/user-dash-board-new.component';
+import { PatientRegisterNewComponent } from './patient-register-new/patient-register-new.component';
+
+import {PreviewRecordComponent} from './preview-record/preview-record.component'
+import { SearchFieldsNewComponent } from './search-fields-new/search-fields-new.component';
 //import { ButtonViewComponent } from './mytable/mytable.component'
 //import {BasicExampleButtonViewComponent} from './mytable/mytable.component'
 
@@ -36,15 +42,16 @@ const routes: Routes = [
     component:ResetPasswordComponent
   },
 
+  
   {
     path:'user_dashboard',
     component:UserDashboardComponent,
     canActivate:[UserAuthGaurd],
     children:[
       
-      /*{
-        path:'user_management',
-        component:UserManagementComponent
+      {
+        path:'record',
+        component:DisplayrecordComponent
       },  
 
       /*
@@ -56,6 +63,12 @@ const routes: Routes = [
 
     ]
   },
+
+  {
+    path:'user_dashboard1/:master',
+    component:UserDashboardComponent,
+  },
+  
   {
     path:'sampledb',
     component:SampleDashboardComponent
@@ -113,6 +126,37 @@ const routes: Routes = [
   {
     path:'form',
     component: PatientRegisterComponent
+  },
+
+  //new routes start here
+
+  {
+    path :'user_dashboard_new',
+    component : UserDashBoardNewComponent,
+    children : [
+
+      {
+        path : 'register',
+        component : PatientRegisterNewComponent,
+        children : [
+          {
+            path : 'preview',
+            component : PreviewRecordComponent
+          }
+        ]
+      },
+      {
+        path : 'search',
+        component : SearchFieldsNewComponent,
+        children : [
+          {
+            path : 'display',
+            component : DisplayrecordComponent
+          }  
+
+        ]
+      }
+    ]
   }
 
 ];

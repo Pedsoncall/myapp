@@ -9,15 +9,16 @@ import { CookieService } from 'ngx-cookie-service';
 import { DatePipe } from '@angular/common';
 import { SharedService } from '../shared.service';
 
-
 @Component({
-  selector: 'app-patient-register',
-  templateUrl: './patient-register.component.html',
-  styleUrls: ['./patient-register.component.css']
+  selector: 'app-patient-register-new',
+  templateUrl: './patient-register-new.component.html',
+  styleUrls: ['./patient-register-new.component.css']
 })
-export class PatientRegisterComponent implements OnInit {
+export class PatientRegisterNewComponent implements OnInit {
+
   @Input() record : any
-  
+
+
   constructor(
     private formBuilder: FormBuilder,
     private loginServ: PatientDetailsService,
@@ -26,11 +27,10 @@ export class PatientRegisterComponent implements OnInit {
     private cook: CookieService,
     private datepipe : DatePipe,
     private sharedService: SharedService
-  ) 
-  { 
-    
+  ) { 
+
     this.fetchingData = 0;
-    this.displayStruct = 'searchFields'
+    
     this.username = this.cook.get('username')
     this.templateForm.personalDetails.providerName = this.username
     /*
@@ -51,7 +51,7 @@ export class PatientRegisterComponent implements OnInit {
       this.listOfClientName = response
       console.log(this.listOfClientName.ClientName)
       this.fetchingData = 1
-      
+      this.displayStruct = 'patreg'
             
             })
     
@@ -66,6 +66,7 @@ export class PatientRegisterComponent implements OnInit {
       //console.log(this.data);
       console.log("Data Returned")
 
+      
 
       })
 
@@ -87,11 +88,13 @@ export class PatientRegisterComponent implements OnInit {
           this.templateForm = this.autofillrecord
           this.displayMode();
           console.log(this.autofillrecord)
+          this.sharedService.nextMessage('false')
           
         }
 
-  }
+        
 
+  }
 
   listOfClients: any;
   listOfClientName
@@ -191,7 +194,7 @@ export class PatientRegisterComponent implements OnInit {
   }
 
   onSubmit1(){
-    this.router.navigate(['form'])
+    //this.router.navigate(['form'])
     this.templateForm.medicalDetails.search = this.myForm.controls.useremail.value
     console.log(this.templateForm)
     this.loginServ.patientDetails(this.templateForm).subscribe((data) => {
@@ -394,6 +397,16 @@ export class PatientRegisterComponent implements OnInit {
   }
 
 
+
+  preview(){
+
+    this.displayStruct='false'
+    this.sharedService.nextMessage('true');
+    this.sharedService.nextRecord(this.templateForm);
+
+    this.router.navigate(['/user_dashboard_new/register/preview']);
+    
+  }
 
 
 }

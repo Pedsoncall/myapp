@@ -1,0 +1,36 @@
+
+
+
+
+<div class="limit-height">
+    <clr-datagrid>
+        <clr-dg-column [clrDgField]="'result.personalDetails.patientFirstName'" >Patient Name</clr-dg-column>
+        <clr-dg-column [clrDgField]="'name'">PATIENT DOB</clr-dg-column>
+        <clr-dg-column [clrDgField]="'creation'">PCP NAME</clr-dg-column>
+        <clr-dg-column [clrDgField]="'pokemon.name'">TIME</clr-dg-column>
+        <clr-dg-column [clrDgField]="'color'">ACTION</clr-dg-column>
+        
+    
+        <clr-dg-row *clrDgItems="let one of result">
+            <clr-dg-cell>{{ one.personalDetails.patientFirstName +' ' + one.personalDetails.patientLastName }}</clr-dg-cell>
+            <clr-dg-cell>{{ one.personalDetails.dob }}</clr-dg-cell>
+            <clr-dg-cell>{{ one.personalDetails.pcp }}</clr-dg-cell>
+            <clr-dg-cell>{{ one.personalDetails.consultationStartTime }}</clr-dg-cell>
+            <clr-dg-cell>
+                <button class="btn btn-success-outline" (click)="display(one)" > view record </button>
+            </clr-dg-cell>
+        </clr-dg-row>
+    
+        
+    </clr-datagrid>
+</div>
+
+
+<div *ngIf="editRecord=='true'" >
+        <app-patient-record [record]="record" > 
+
+        {{ record }}
+        <p>hehe</p>
+
+        </app-patient-record>
+</div>

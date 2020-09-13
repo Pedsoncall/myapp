@@ -1,19 +1,21 @@
+
 import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
-
-
 import {SharedService} from '../shared.service'
 
 
+
 @Component({
-  selector: 'app-search-results',
-  templateUrl: './search-results.component.html',
-  styleUrls: ['./search-results.component.css']
+  selector: 'app-search-results-new',
+  templateUrl: './search-results-new.component.html',
+  styleUrls: ['./search-results-new.component.css']
 })
-export class SearchResultsComponent implements OnInit {
-  
-  constructor(private router:Router,
-    private sharedService: SharedService) {}
+export class SearchResultsNewComponent implements OnInit {
+
+  constructor(
+    private router:Router,
+    private sharedService: SharedService
+  ) { }
 
   @Input() result:any;
 
@@ -39,7 +41,8 @@ export class SearchResultsComponent implements OnInit {
     this.sharedService.nextRecord(this.record);
     console.log("record sent");
 
-    this.router.navigate(['/user_dashboard/record']);
+    this.router.navigate(['/user_dashboard_new/search/display']);
+    console.log('print')
 
 
   }
@@ -61,13 +64,11 @@ export class SearchResultsComponent implements OnInit {
     
     this.master=record.personalDetails.dob
     
-    this.router.navigate(['/user_dashboard1',this.master]);
+    this.router.navigate(['/user_dashboard_new/register']);
     //this.patientRegister.displayMode();
     console.log('printed')
 
     
   }
-
-
 
 }

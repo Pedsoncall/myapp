@@ -1,0 +1,58 @@
+
+
+
+    
+        <div class="card" *ngIf='visible=="true" '>
+            <div class="card-header">
+                Patient Record Details
+            </div>
+            <div class="card-block">
+                <p>Consultation Start Time : {{record.personalDetails.consultationStartTime}}</p>
+                <p>Consultation End Time : {{record.personalDetails.consultationEndTime}}</p>
+                <p>Patient First Name : {{record.personalDetails.patientFirstName}}</p>
+                <p>Patient Last Name : {{record.personalDetails.patientLastName}}</p>
+                <p>Caller Name : {{record.personalDetails.callerName}}</p>
+                <p>Caller Number : {{record.personalDetails.callerNumber}}</p>
+                <p>Provider Name : {{record.personalDetails.providerName}}</p>
+                <p>Date Of Birth : {{record.personalDetails.dob}} </p>
+                <p>Client Name : {{record.personalDetails.client}}</p>
+                <p>PCP Name : {{record.personalDetails.pcp}} </p>
+            </div>
+            <div class="card-block">
+                <h4>Allergies</h4>
+                <p>{{record.medicalDetails.allergies}}</p>
+                <h4>MEDS</h4>
+                <p>{{record.medicalDetails.meds}}</p>
+                <h4>PMH</h4>
+                <p>{{record.medicalDetails.pmh}}</p>
+                <h4>FH</h4>
+                <p>{{record.medicalDetails.fh}}</p>
+                <h4>SH</h4>
+                <p>{{record.medicalDetails.sh}}</p>
+                <h4>CC</h4>
+                <p>{{record.medicalDetails.cc}}</p>
+                <h4>HPI</h4>
+                <p>{{record.medicalDetails.hpi}}</p>
+                <h4>ROS</h4>
+                <p>{{record.medicalDetails.ros}}</p>
+                <h4>Exam</h4>
+                <p>{{record.medicalDetails.exam}}</p>
+                <h4>Plan</h4>
+                <p>{{record.medicalDetails.plan}}</p>
+                <h4>Diagnosis</h4>
+                <ul class="list">
+                    <li *ngFor="let diag of record.medicalDetails.search"> {{diag}}</li>
+                </ul>
+                <h4>CPT</h4>
+                <p>{{record.medicalDetails.coding}}</p>
+                
+            </div>
+            <div class="card-footer">
+                <a class="btn btn-outline" (click)='edit()' >Edit Details</a>
+                
+                <a class="btn btn-primary" (click)='submit()' >Submit</a>
+
+            </div>
+        </div>
+    
+

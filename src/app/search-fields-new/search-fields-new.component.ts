@@ -1,21 +1,21 @@
+
 import { Component, OnInit, Input } from '@angular/core';
 import {FormGroup, FormControl, Validators, FormBuilder} from "@angular/forms";
 import { HttpClient } from '@angular/common/http';
 import { PatientDetailsService } from '../patient-details.service';
-//import { SearchResultsComponent } from '../search-results/search-results.component';
-//import { SampleDashboardComponent } from '../sample-dashboard/sample-dashboard.component';
+
 import { BehaviorSubject } from 'rxjs';
 import { DisplayrecordComponent } from '../displayrecord/displayrecord.component';
 import { SharedService } from '../shared.service';
 
 @Component({
-  selector: 'app-search-fields',
-  templateUrl: './search-fields.component.html',
-  styleUrls: ['./search-fields.component.css']
+  selector: 'app-search-fields-new',
+  templateUrl: './search-fields-new.component.html',
+  styleUrls: ['./search-fields-new.component.css']
 })
-export class SearchFieldsComponent implements OnInit {
-  
-  
+export class SearchFieldsNewComponent implements OnInit {
+
+
   show = 'false'
   
   result
@@ -38,19 +38,14 @@ export class SearchFieldsComponent implements OnInit {
     callerNumber : '',
   };
 
-
-  constructor(private formbuilder: FormBuilder,
-              private httpclient:HttpClient,
-              private loginServ: PatientDetailsService,
-              private sharedService: SharedService
-              
-              //private sr:SearchResultsComponent,
-              //private sdb:SampleDashboardComponent
-              ) { 
-
-
-
+  constructor(
+    private formbuilder: FormBuilder,
+    private httpclient:HttpClient,
+    private loginServ: PatientDetailsService,
+    private sharedService: SharedService,
     
+              
+  ) { 
 
     this.fetchingData = 0;
    
@@ -98,6 +93,7 @@ export class SearchFieldsComponent implements OnInit {
 
     this.show='false'
     this.sharedService.nextMessage('false')
+    
     console.log(this.searchForm)
 
     this.httpclient.post('http://44.230.62.224:5000/searchPatient',this.searchForm)

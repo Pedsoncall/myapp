@@ -1,0 +1,96 @@
+
+
+<div class="clr-row" *ngIf='fetchingData== 1'>
+    <div class="clr-col-lg-4 clr-col-12">
+        <div class="card">
+            <div class="card-header">
+                <b>SEARCH PATIENT</b>
+            </div>
+            <div class="card-block">
+
+
+                <form class="clr-form" #searchingForm="ngForm" (keydown.enter)="$event.preventDefault()" *ngIf='fetchingData== 1' (ngSubmit)="onSubmit()">
+
+                    
+                    <clr-input-container>
+                        <label>Patient First Name</label>
+                        <input clrInput [(ngModel)]="searchForm.patientFirstName" name="patientFirstName" />
+                    </clr-input-container>
+                    <clr-input-container>
+                        <label>Patient Last Name</label>
+                        <input clrInput [(ngModel)]="searchForm.patientLastName" name="patientLastName" />
+                    </clr-input-container>
+                    <clr-date-container>
+                        <label>Date Of Birth</label>
+                        <input [(ngModel)]="searchForm.dob" name="dob" type="date" clrDate>
+                        <clr-control-error *clrIfError="'required'">Date Of Birth Required</clr-control-error>
+                    </clr-date-container>
+                    
+                    <clr-select-container>
+                        <label>Select the Client Name</label>
+                        <select [(ngModel)]="searchForm.clientName" name="clientName" clrSelect  (change)="changePCP($event.target.value)">
+                            <option value="">Select the Client</option>
+                            <option  *ngFor="let names of listOfClientName.ClientName;" [value]="names">
+                                {{names}}
+                            </option>
+                        </select>
+                    </clr-select-container>
+                    <div *ngIf = "displayPCP == 1">
+                        <clr-select-container>
+                            <label>Select the PCP</label>
+                            <select [(ngModel)]="searchForm.pcpName" clrSelect name="pcpName">
+                                <option value="">Select the PCP</option>
+                                <option  *ngFor="let order of listOfClients.Clients;" [value]="order">
+                                    {{order}}
+                                </option>
+                            </select>
+                        </clr-select-container>
+                    </div>
+                   
+                    <clr-input-container>
+                        <label>Enter Caller Number</label>
+                        <input clrInput [(ngModel)]="searchForm.callerNumber" name="callerNumber"/>
+                    </clr-input-container>
+                    <br>
+                    <button type="submit" class="btn btn-success-outline">Search</button>
+                </form>
+
+
+            </div>
+
+            
+        </div>
+
+       
+
+        
+    </div>
+
+    <app-search-results-new  [result]="result" *ngIf="show=='true'" class="clr-col-lg-8 clr-col-6" >
+
+
+    </app-search-results-new >
+
+   
+
+</div>
+
+<span class="spinner spinner-lg" *ngIf='fetchingData== 0' >
+    Loading...
+</span>
+
+
+<router-outlet></router-outlet>
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -19,6 +19,8 @@ export class PatientRegisterNewComponent implements OnInit {
   @Input() record : any
 
 
+  username = 'ajay' //should 
+
   constructor(
     private formBuilder: FormBuilder,
     private loginServ: PatientDetailsService,
@@ -70,6 +72,18 @@ export class PatientRegisterNewComponent implements OnInit {
 
       })
 
+      this.httpclient.get('http://44.230.62.224:5000/cptCode')
+    .toPromise()
+    .then(response => {
+      this.cptData=response;
+      this.cptData=this.cptData.cptCode;
+      //console.log(this.data);
+      console.log("Data Returned")
+
+      
+
+      })
+
       this.viewVirtualScroll = false
       this.resultsOfVirtualScroll = false
 
@@ -98,7 +112,6 @@ export class PatientRegisterNewComponent implements OnInit {
 
   listOfClients: any;
   listOfClientName
-  username;
   fetchingData = 0;
   displayPCP = 0;
   displayCPTList = 0;
@@ -116,6 +129,7 @@ export class PatientRegisterNewComponent implements OnInit {
 
   data;
   data1;
+  cptData;
   viewVirtualScroll : boolean;
   resultsOfVirtualScroll : boolean;
 
@@ -136,6 +150,7 @@ export class PatientRegisterNewComponent implements OnInit {
     },
     medicalDetails: {
       allergies: '',
+      allergyType: '',
       meds: '',
       pmh:'',
       fh:'',
@@ -170,9 +185,10 @@ export class PatientRegisterNewComponent implements OnInit {
   }
   
   onSubmit(templateFormValues: {}) {
-    this.router.navigate(['form'])
+    //this.router.navigate(['form'])
     console.log(templateFormValues)
     //console.log(this.data)
+   
     this.loginServ.patientDetails(templateFormValues).subscribe((data) => {
       //this.apiret = data
       console.log(data)
@@ -278,6 +294,9 @@ export class PatientRegisterNewComponent implements OnInit {
     
 
     console.log(this.myForm.controls.useremail)
+    this.templateForm.medicalDetails.search = this.myForm.controls.useremail.value
+
+    console.log(this.templateForm.medicalDetails.search)
 
   }
 
@@ -302,6 +321,9 @@ export class PatientRegisterNewComponent implements OnInit {
     
 
     console.log(this.myForm.controls.useremail)
+    this.templateForm.medicalDetails.search = this.myForm.controls.useremail.value
+
+    console.log(this.templateForm.medicalDetails.search)
 
   }
 
@@ -358,7 +380,7 @@ export class PatientRegisterNewComponent implements OnInit {
 
     this.list=[]
 
-    this.list = this.data.filter(item => { if(item.description.includes(this.search) || item.description.includes(this.search.toUpperCase() ) || item.codeid.includes(this.search)) { return item } });
+    this.list = this.cptData.filter(item => { if(item.description.includes(this.search) || item.description.includes(this.search.toUpperCase() ) || item.codeid.includes(this.search)) { return item } });
 
     console.log(this.list)
     const emailFormArray = <FormArray>this.myForm2.controls.useremail;

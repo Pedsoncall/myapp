@@ -1,5 +1,6 @@
 import { Component, OnInit,Input } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
+import { PatientRegisterNewComponent } from '../patient-register-new/patient-register-new.component';
 
 @Component({
   selector: 'app-patient-record',
@@ -19,7 +20,8 @@ export class PatientRecordComponent implements OnInit {
 
 
   constructor(
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private register:PatientRegisterNewComponent
   ) { 
 
 
@@ -80,7 +82,7 @@ export class PatientRecordComponent implements OnInit {
 
   onSubmit()
   {
-
+    this.register.onSubmit(this.register.templateForm)
     console.log(this.form.value)
   }
 

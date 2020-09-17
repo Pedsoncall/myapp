@@ -5,7 +5,7 @@
     <div class="clr-row">
         <div class="clr-col-lg-5  clr-col-12"> 
             <clr-input-container>
-                <label>Consultation Start Time</label>
+                <label>Encounter Start Time</label>
                 <input clrInput type="datetime" [(ngModel)]="templateForm.personalDetails.consultationStartTime" name="consultationStartTime" required />
             </clr-input-container>
         </div>
@@ -13,8 +13,9 @@
             <div class="clr-row">
                 <div class="clr-col-lg-5  clr-col-12">
                     <clr-input-container>
-                        <label>Consultation End Time</label>
+                        <label>Encounter End Time</label>
                         <input clrInput [(ngModel)]="templateForm.personalDetails.consultationEndTime" name="consultationEndTime" required/>
+                        <clr-control-error *clrIfError="'required'">Consultation End Time Required</clr-control-error>
                     </clr-input-container>
                 </div>
                 <div class="clr-col-lg-5  clr-col-12" style="padding-top: 5%;">
@@ -24,7 +25,7 @@
         </div>
     </div>
     <br>
-    <form clrStepper class="clr-form" #patientForm="ngForm" (keydown.enter)="$event.preventDefault()" (ngSubmit)="onSubmit1()">
+    <form clrStepper class="clr-form" #patientForm="ngForm" (keydown.enter)="$event.preventDefault()" (ngSubmit)="preview()">
         <clr-stepper-panel ngModelGroup="personalDetails">
         <clr-step-title>Patient Details</clr-step-title>
         <clr-step-description>Fill the details of patients.</clr-step-description>
@@ -36,7 +37,7 @@
                 <input clrInput [(ngModel)]="templateForm.personalDetails.callerName" name="callerName"  required />
             </clr-input-container>
             <clr-input-container>
-                <label>Caller Number</label>
+                <label>Callback Number</label>
                 <!--<input clrInput [(ngModel)]="templateForm.personalDetails.callerNumber" name="callerNumber" required />-->
                 <input clrInput class="form-control"  type="text" [(ngModel)]="templateForm.personalDetails.callerNumber" name="callerNumber"> 
             </clr-input-container>
@@ -49,12 +50,12 @@
             <label>Patient Last Name</label>
             <input clrInput [(ngModel)]="templateForm.personalDetails.patientLastName" name="patientLastName" required />
             </clr-input-container>
-
+            <!--
             <clr-input-container>
                 <label>Provider Name</label>
                 <input clrInput [(ngModel)]="templateForm.personalDetails.providerName" name="providerName" readonly value={{username}} required />
             </clr-input-container>
-
+            -->
             <clr-date-container>
                 <label>Date Of Birth</label>
                 <input [(ngModel)]="templateForm.personalDetails.dob" type="date" clrDate name="dob">
@@ -64,13 +65,14 @@
 
             <clr-select-container>
                 <label>Select the Client Name</label>
-                <select [(ngModel)]="templateForm.personalDetails.client" clrSelect name="client" (change)="changePCP($event.target.value)">
+                <select [(ngModel)]="templateForm.personalDetails.client" clrSelect name="client">
                     <option value="">Select the Client</option>
                     <option  *ngFor="let names of listOfClientName.ClientName;" [value]="names">
                         {{names}}
                     </option>
                 </select>
             </clr-select-container>
+            <!--
             <div *ngIf = "displayPCP == 1">
                 <clr-select-container>
                     <label>Select the PCP</label>
@@ -82,26 +84,41 @@
                     </select>
                 </clr-select-container>
             </div>
+            -->
             <button clrStepButton="next">next</button>
         </clr-step-content>
         </clr-stepper-panel>
     
         <clr-stepper-panel ngModelGroup="medicalDetails">
-        <clr-step-title>Medical Details</clr-step-title>
+        <clr-step-title>NOTE</clr-step-title>
         <clr-step-description>Fill the Medical information of the patient</clr-step-description>
         <clr-step-content>
             
 
-
-            <div class="clr-form-control">
-                <clr-textarea-container>
-                    <label class="clr-control-label">Allergies</label>
-                    <textarea clrTextarea [(ngModel)]="templateForm.medicalDetails.allergies" name="allergies" placeholder="Mention the allergies of patient if any..." cols="70" required></textarea>
-                    <clr-control-helper>Helper text</clr-control-helper>
-                    <clr-control-error>You must provide a description!</clr-control-error>
-                </clr-textarea-container>
+            <div class="cls-row">
+                <div class="clr-col-lg-5  clr-col-5">
+                    <clr-select-container>
+                        <label>Select the Allergy Type</label>
+                        <select [(ngModel)]="templateForm.medicalDetails.allergyType" clrSelect name="allergyType">
+                            <option value="">Select the Allergy Type</option>
+                            <option value="Medication Allergy">Medication Allergy</option>
+                            <option value="Non-Medication Allergy">Non-Medication Allergy</option>
+                            <option value="Vaccine Reactions">Vaccine Reactions</option>
+                            <option value="Rx Adverse Reactions">Rx Adverse Reactions</option>
+                        </select>
+                    </clr-select-container>
+                </div>
+                <div class="clr-col-lg-5  clr-col-12">
+                    <!--<div class="clr-form-control">-->
+                        <clr-textarea-container>
+                            <label class="clr-control-label">Allergies</label>
+                            <textarea clrTextarea [(ngModel)]="templateForm.medicalDetails.allergies" name="allergies" placeholder="Mention the allergies of patient if any..." cols="70" required></textarea>
+                            <clr-control-helper>Helper text</clr-control-helper>
+                            <clr-control-error>You must provide a description!</clr-control-error>
+                        </clr-textarea-container>
+                    <!--</div>-->
+                </div>
             </div>
-
 
             <div class="clr-form-control">
                 <clr-textarea-container>
@@ -248,14 +265,16 @@
             
 
 
-            <button class="btn btn-default" type='button' (click)="preview()"> preview</button>
+            <!--<button class="btn btn-default" type='button' (click)="preview()"> preview</button>-->
+
             <button clrStepButton="submit"><clr-icon shape="success-standard"></clr-icon>&nbsp;&nbsp;submit</button> 
 
+            <!--
             <div class="btn-group btn-primary">
                 <button class="btn" type="button" (click)="preview()">Preview</button>
                 <br><br><br><br>
                 <button class="btn btn-success"> <clr-icon shape="success-standard"></clr-icon>&nbsp;&nbsp;submit </button>
-            </div>
+            </div> -->
 
 
         </clr-step-content>

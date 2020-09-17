@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -21,7 +22,8 @@ export class RegisterComponent implements OnInit {
 
   re_password 
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient,
+                private router: Router) { }
 
   ngOnInit(): void {
   }
@@ -42,6 +44,7 @@ export class RegisterComponent implements OnInit {
     })
     .catch(console.log);
 
+  this.router.navigate([''])
     
 
   }

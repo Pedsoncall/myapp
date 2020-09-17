@@ -34,6 +34,7 @@ export class PreviewRecordComponent implements OnInit {
         {
           
           this.sharedService.sharedRecord.subscribe(record => this.record = record)
+          console.log(this.record.medicalDetails.search)
           this.visible='true'
           
           
@@ -64,7 +65,9 @@ export class PreviewRecordComponent implements OnInit {
   submit()
   {
     this.record=this.register.templateForm
+    console.log(this.record)
     this.register.onSubmit(this.record)
+    this.router.navigate(['/user_dashboard_new/search'])
   }
 
 
